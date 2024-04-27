@@ -1,0 +1,7 @@
+{
+	"files.associations": {
+		"core_engine.h": "c",
+		"mlx.h": "c",
+		"logging.h": "c"
+	}
+}
