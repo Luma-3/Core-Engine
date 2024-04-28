@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 00:40:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/28 01:19:39 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/28 12:10:15 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static t_list	**read_config_file(int fd)
 	{
 		raw_line = get_next_line(fd);
 		logdebug(__FILE__, __LINE__, "Reading config file...");
-		logdebug(__FILE__, __LINE__, raw_line);
 		if (!raw_line)
 			break ;
 		node = ft_lstnew(raw_line);
@@ -66,17 +65,19 @@ int	read_config(t_engine *engine)
 	if (fd == FAILURE)
 		return (FAILURE);
 	config = read_config_file(fd);
+	close(fd);
 	if (config == NULL)
 	{
-		close(fd);
 		return (FAILURE);
 	}
-	if (parse_config(engine, config) == FAILURE)
+	if (parse_config(engine, *config) == FAILURE)
 	{
-		close(fd);
 		ft_lstclear(config, free);
+		free(config);
 		return (FAILURE);
 	}
-	close(fd);
+	ft_lstclear(config, free);
+	free(config);
+	logdebug(__FILE__, __LINE__, "Config file parsed successfully");
 	return (SUCCESS);
 }

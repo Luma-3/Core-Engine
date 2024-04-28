@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/27 21:47:13 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/28 18:13:45 by jbrousse         ###   ########.fr       */
+/*   Created: 2024/04/28 16:58:08 by jbrousse          #+#    #+#             */
+/*   Updated: 2024/04/28 18:10:49 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <core_engine.h>
+#ifndef OBJECT_H
+# define OBJECT_H
 
-int	main(void)
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+
+# include "coord.h"
+# include "logging.h"
+# include "render.h"
+
+typedef struct s_object
 {
-	t_object	*object;
+	char					*name;
+	int						id;
+	t_coord					coord;
+	t_img					*img;
 
-	object = new_obj("test", 1);
-	if (init_core() == FAILURE)
-		return (FAILURE);
-	if (init_renderer() == FAILURE)
-		return (FAILURE);
-	event_hook(stop_engine, 17, 1L << 17, NULL);
-	event_hook(stop_engine, 2, 1L << 0, NULL);
-	loop();
-	return (0);
-}
+}				t_object;
+
+t_object	*new_obj(char *name, int id);
+
+#endif

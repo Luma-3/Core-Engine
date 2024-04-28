@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   draw_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/27 21:47:13 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/28 18:13:45 by jbrousse         ###   ########.fr       */
+/*   Created: 2024/04/28 15:00:19 by jbrousse          #+#    #+#             */
+/*   Updated: 2024/04/28 15:11:49 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <core_engine.h>
+#include "core_engine.h"
 
-int	main(void)
+void	pixel_put(t_img *img, t_coord *coord, int color)
 {
-	t_object	*object;
+	int		offset;
 
-	object = new_obj("test", 1);
-	if (init_core() == FAILURE)
-		return (FAILURE);
-	if (init_renderer() == FAILURE)
-		return (FAILURE);
-	event_hook(stop_engine, 17, 1L << 17, NULL);
-	event_hook(stop_engine, 2, 1L << 0, NULL);
-	loop();
-	return (0);
+	offset = (roundf(coord->y) * img->l_length
+			+ roundf(coord->x) * (img->bpp / 8));
+	*(unsigned int *)(img->addr + offset) = color;
 }

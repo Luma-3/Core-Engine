@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/27 21:44:08 by jbrousse          #+#    #+#              #
-#    Updated: 2024/04/28 01:14:18 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/04/28 15:30:28 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,21 +37,39 @@ LIBFT_OPT =	-L $(LIBFT_DIR) -lft
 
 SRC_DIR			=	srcs/
 
+SRC_CLOSING_DIR	=	closing/
+SRC_CLOSING_LIST	=	close.c
+SRC_CLOSING		=	$(addprefix $(SRC_CLOSING_DIR), $(SRC_CLOSING_LIST))
+
 SRC_INIT_DIR	=	initializer/
 SRC_INIT_LIST	=	init_core.c		\
 					parse_config.c	\
 					read_config.c
 SRC_INIT		=	$(addprefix $(SRC_INIT_DIR), $(SRC_INIT_LIST))
 
+SRC_IO_DIR		=	io/
+SRC_IO_LIST		=	event.c
+SRC_IO			=	$(addprefix $(SRC_IO_DIR), $(SRC_IO_LIST))
+
 SRC_LOGGING		=	logger/
 SRC_LOG_LIST	=	logging.c		\
 					logging_msg.c
 SRC_LOG			=	$(addprefix $(SRC_LOGGING), $(SRC_LOG_LIST))
 
+SRC_RENDERER_DIR	=	renderer/
+SRC_RENDERER_LIST	=	renderer.c		\
+						draw_utils.c	\
+						image.c
+SRC_RENDERER		=	$(addprefix $(SRC_RENDERER_DIR), $(SRC_RENDERER_LIST))
+
 SRC_LIST		=	core_engine.c	\
 					loop.c			\
+					coordinate.c	\
 					$(SRC_LOG)		\
-					$(SRC_INIT)
+					$(SRC_INIT)		\
+					$(SRC_IO)		\
+					$(SRC_CLOSING)	\
+					$(SRC_RENDERER)
 SRC				=	$(addprefix $(SRC_DIR), $(SRC_LIST))
 
 ################
@@ -152,5 +170,8 @@ fclean: clean
 	@echo "$(COLOR_RED)$(BOLD)Delete $(NAME)$(COLOR_RESET)"
 
 re: fclean all
+
+norme:
+	@norminette $(SRC_DIR) $(INC_DIR) | grep -v Norme -B 1 || true
 
 .PHONY: all clean fclean re

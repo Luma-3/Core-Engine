@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   coord.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/27 23:38:35 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/27 23:40:44 by jbrousse         ###   ########.fr       */
+/*   Created: 2024/04/28 14:00:50 by jbrousse          #+#    #+#             */
+/*   Updated: 2024/04/28 17:00:12 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#ifndef COORD_H
+# define COORD_H
 
-typedef enum {
-    DEBUG,
-    INFO,
-    WARNING,
-    ERROR
-} LogLevel;
-
-void logdebug(LogLevel level, const char* file, int line, const char* message)
+typedef struct s_coord
 {
-    printf("[DEBUG] %s:%d - %s\n", file, line, message);
-}
+	float	x;
+	float	y;
+}			t_coord;
 
-int main() {
-	logdebug(DEBUG, __FILE__, __LINE__, "Hello, World!");
-    return 0;
-}
+t_coord	*new_coord(float x, float y);
+
+void	free_coord(t_coord *coord);
+#endif
