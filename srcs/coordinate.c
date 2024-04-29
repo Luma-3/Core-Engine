@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:30:06 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/28 14:36:04 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/29 18:12:33 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,9 @@ t_coord	*world_to_screen(t_coord *world)
 	screen = new_coord(0, 0);
 	if (!screen)
 		return (NULL);
-	screen->x = world->x / engine->width;
-	screen->y = world->y / engine->height;
+	screen->x = world->x + engine->camera->coord->x + (engine->width / 2);
+	screen->y = (engine->height / 2) - world->y + engine->camera->coord->y;
+	// printf("camera x: %f, y: %f\n", engine->camera->coord->x, engine->camera->coord->y);
 	return (screen);
 }
 

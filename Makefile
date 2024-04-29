@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/27 21:44:08 by jbrousse          #+#    #+#              #
-#    Updated: 2024/04/28 15:30:28 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/04/29 18:00:02 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 ###############
 
 CC		=	cc
-CFLAGS	=	-Wall -Werror -Wextra -g3
+CFLAGS	=	-Wall -Wextra -g3
 
 
 ##############
@@ -56,20 +56,29 @@ SRC_LOG_LIST	=	logging.c		\
 					logging_msg.c
 SRC_LOG			=	$(addprefix $(SRC_LOGGING), $(SRC_LOG_LIST))
 
+SRC_OBJ_DIR		=	object/
+SRC_OBJ_LIST	=	object.c \
+					camera.c
+SRC_OBJ			=	$(addprefix $(SRC_OBJ_DIR), $(SRC_OBJ_LIST))
+
 SRC_RENDERER_DIR	=	renderer/
 SRC_RENDERER_LIST	=	renderer.c		\
+						frame.c			\
 						draw_utils.c	\
-						image.c
+						image.c			\
+						render_2d.c		\
+						init_render.c
 SRC_RENDERER		=	$(addprefix $(SRC_RENDERER_DIR), $(SRC_RENDERER_LIST))
 
 SRC_LIST		=	core_engine.c	\
 					loop.c			\
 					coordinate.c	\
 					$(SRC_LOG)		\
+					$(SRC_OBJ)		\
 					$(SRC_INIT)		\
 					$(SRC_IO)		\
 					$(SRC_CLOSING)	\
-					$(SRC_RENDERER)
+					$(SRC_RENDERER)	
 SRC				=	$(addprefix $(SRC_DIR), $(SRC_LIST))
 
 ################

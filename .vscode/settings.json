@@ -4,6 +4,13 @@
 		"mlx.h": "c",
 		"logging.h": "c",
 		"render.h": "c",
-		"object.h": "c"
+		"object.h": "c",
+		"test.h": "c",
+		"coord.h": "c",
+		"array": "c",
+		"deque": "c",
+		"vector": "c",
+		"string_view": "c",
+		"keysym.h": "c"
 	}
 }

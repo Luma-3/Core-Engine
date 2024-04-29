@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:43:18 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/28 13:51:53 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/29 11:00:28 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,7 @@ int	init_core(void)
 		logerror(__FILE__, __LINE__, "read_config() failed");
 		return (FAILURE);
 	}
+	ft_bzero(engine->object_2d, sizeof(t_object2d));
+	ft_bzero(&(engine->camera), sizeof(t_camera));
 	return (__launch_mlx(engine));
 }

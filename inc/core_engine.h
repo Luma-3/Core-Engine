@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:31:24 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/28 17:43:02 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/29 18:07:50 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include "coord.h"
 # include "render.h"
 # include "object.h"
+# include "key_bind.h"
 
 # define FAILURE -1
 # define SUCCESS 0
@@ -31,6 +32,8 @@
 
 # define VOID_COLOR 0x0000FF
 
+# define OBJ_2D_MAX 300
+
 typedef struct s_engine
 {
 	void		*mlx;
@@ -38,7 +41,9 @@ typedef struct s_engine
 	int			width;
 	int			height;
 	char		*title;
+	t_camera	*camera;
 	t_renderer	*renderer;
+	t_object2d	*object_2d[OBJ_2D_MAX];
 }			t_engine;
 
 t_engine	*get_engine(void);
