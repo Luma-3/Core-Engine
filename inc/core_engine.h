@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:31:24 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/29 18:07:50 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/30 11:31:35 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
 
 # include "logging.h"
 # include "coord.h"

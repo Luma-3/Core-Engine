@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/27 21:44:08 by jbrousse          #+#    #+#              #
-#    Updated: 2024/04/29 18:00:02 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/04/30 11:17:28 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,21 +15,7 @@
 ###############
 
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -g3
-
-
-##############
-##   LIBS	##
-##############
-
-
-MLX_DIR = 	libs/minilibx/ 
-MLX		=	$(MLX_DIR)libmlx_Linux.a
-MLX_OPT	=	-L $(MLX_DIR) -lmlx -lXext -lX11 -lm
-
-LIBFT_DIR =	libs/libft/
-LIBFT	=	$(LIBFT_DIR)libft.a
-LIBFT_OPT =	-L $(LIBFT_DIR) -lft
+CFLAGS	=	-Wall -Werror -Wextra -g3
 
 ##############
 ##  SOURCE	##
@@ -86,8 +72,8 @@ SRC				=	$(addprefix $(SRC_DIR), $(SRC_LIST))
 ################
 
 INC_LST		=	./inc/			\
-				./$(MLX_DIR)	\
-				./$(LIBFT_DIR)includes/
+				./libs/minilibx/	\
+				./libs/libft/includes/
 INCLUDES	=	$(addprefix -I, $(INC_LST))			
 
 ################
@@ -151,15 +137,12 @@ endef
 ##	RULES  ##
 #############
 
-all: $(NAME) $(LIBFT)
-
-$(LIBFT):
-	@make -C $(LIBFT_DIR)
+all: $(NAME) 
 
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) $(INCLUDES) $(MLX_OPT) $(LIBFT_OPT) -o $@ -c $<
+	@$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
 
 	@$(eval COMPILED_SRCS=$(shell expr $(COMPILED_SRCS) + 1))
 	@$(call print_progress,$(COMPILED_SRCS),$(TOTAL_SRCS), $<)
@@ -170,12 +153,10 @@ $(NAME): $(OBJ)
 
 clean: 
 	@rm -rf $(OBJ_DIR)
-	@make -C $(LIBFT_DIR) clean
 	@echo "$(COLOR_RED)$(BOLD)Delete $(NAME) objects$(COLOR_RESET)"
 
 fclean: clean
 	@rm -f $(NAME)
-	@make -C $(LIBFT_DIR) fclean
 	@echo "$(COLOR_RED)$(BOLD)Delete $(NAME)$(COLOR_RESET)"
 
 re: fclean all

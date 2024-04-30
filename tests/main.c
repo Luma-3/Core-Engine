@@ -6,15 +6,12 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 21:47:13 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/29 18:44:50 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/30 11:31:06 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <core_engine.h>
 #include <stdio.h>
-
-# include <X11/X.h>
-# include <X11/keysym.h>
 
 static int	deplace_camera(int keycode, t_camera *camera)
 {
@@ -51,7 +48,6 @@ int	main(void)
 	object2->coord->y = -100;
 	event_hook(stop_engine, 17, 1L << 17, NULL);
 	// event_hook(stop_engine, 2, 1L << 0, NULL);
-	mlx_do_key_autorepeaton(get_engine()->mlx);
 	event_hook(deplace_camera,	KeyPress, KeyPressMask, camera);
 	// key_hook(deplace_camera, camera);
 	loop();
