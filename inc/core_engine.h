@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:31:24 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/30 11:31:35 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/30 14:04:36 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define FAILURE -1
 # define SUCCESS 0
 
-# define CONFIG_FILE "./../config.cfg"
+# define CONFIG_FILE "./config.cfg"
 
 # define VOID_COLOR 0x0000FF
 
@@ -50,7 +50,7 @@ typedef struct s_engine
 
 t_engine	*get_engine(void);
 
-int			init_core(void);
+int			init_engine(void);
 
 void		loop(void);
 
@@ -59,6 +59,8 @@ int			parse_config(t_engine *engine, t_list *config);
 int			read_config(t_engine *engine);
 
 int			stop_engine(void);
+
+int			__init_renderer(t_engine *engine);
 
 //////////////////////////
 //		IO/envent.c		//

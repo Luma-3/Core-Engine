@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:43:18 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/30 11:19:27 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/30 12:14:50 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	__launch_mlx(t_engine *engine)
 	return (SUCCESS);
 }
 
-int	init_core(void)
+int	init_engine(void)
 {
 	t_engine	*engine;
 
@@ -48,5 +48,15 @@ int	init_core(void)
 	}
 	ft_bzero(engine->object_2d, sizeof(t_object2d));
 	ft_bzero(&(engine->camera), sizeof(t_camera));
-	return (__launch_mlx(engine));
+	if (__launch_mlx(engine) == FAILURE)
+	{
+		logerror(__FILE__, __LINE__, "__launch_mlx() failed");
+		return (FAILURE);
+	}
+	if (__init_renderer(engine) == FAILURE)
+	{
+		logerror(__FILE__, __LINE__, "__init_renderer() failed");
+		return (FAILURE);
+	}
+	return (SUCCESS);
 }

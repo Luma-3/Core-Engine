@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 21:47:13 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/30 11:31:06 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/30 12:54:56 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,7 @@ int	main(void)
 	t_object2d	*object2;
 	t_camera	*camera;
 
-	if (init_core() == FAILURE)
-		return (FAILURE);
-	if (init_renderer() == FAILURE)
+	if (init_engine() == FAILURE)
 		return (FAILURE);
 	camera = new_camera();
 	object = new_obj2d("test", 0);

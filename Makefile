@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/27 21:44:08 by jbrousse          #+#    #+#              #
-#    Updated: 2024/04/30 11:17:28 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/04/30 14:49:37 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,18 @@
 
 CC		=	cc
 CFLAGS	=	-Wall -Werror -Wextra -g3
+
+################
+##   LIBS	  ##
+################
+
+LIBFT		= $(LIBFT_DIR)libft.a
+LIBFT_DIR	= libs/libft/
+LIBFT_INC	= $(LIBFT_DIR)includes/
+
+MLX			= $(MLX_DIR)libmlx.a
+MLX_DIR		= libs/minilibx/
+MLX_INC		= $(MLX_DIR)
 
 ##############
 ##  SOURCE	##
@@ -137,8 +149,13 @@ endef
 ##	RULES  ##
 #############
 
-all: $(NAME) 
+all: $(MLX) $(LIBFT) $(NAME) 
 
+$(MLX):
+	@make -C $(MLX_DIR)
+
+$(LIBFT):
+	@make -C $(LIBFT_DIR)
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c
 	@mkdir -p $(dir $@)
@@ -148,16 +165,24 @@ $(OBJ_DIR)%.o : $(SRC_DIR)%.c
 	@$(call print_progress,$(COMPILED_SRCS),$(TOTAL_SRCS), $<)
 
 $(NAME): $(OBJ)
-	@ar rcs $(NAME) $(OBJ)
+	@ar -x $(LIBFT) --output=$(OBJ_DIR)
+	@ar -x $(MLX) --output=$(OBJ_DIR)
+	@ar -rc $(NAME) $(OBJ) $(OBJ_DIR)*.o
 	@echo "\033[2K$(COLOR_ORANGE)$(BOLD)Compilation complete ! $(COLOR_BLUE)$(BOLD)$(NAME) is Ready !$(COLOR_RESET)"
 
 clean: 
 	@rm -rf $(OBJ_DIR)
 	@echo "$(COLOR_RED)$(BOLD)Delete $(NAME) objects$(COLOR_RESET)"
+	@make -C $(LIBFT_DIR) clean
+	@make -C $(MLX_DIR) clean
 
 fclean: clean
 	@rm -f $(NAME)
 	@echo "$(COLOR_RED)$(BOLD)Delete $(NAME)$(COLOR_RESET)"
+	@rm -f $(LIBFT)
+	@echo "$(COLOR_RED)$(BOLD)Delete $(LIBFT)$(COLOR_RESET)"
+	@rm -f $(MLX)
+	@echo "$(COLOR_RED)$(BOLD)Delete $(MLX)$(COLOR_RESET)"
 
 re: fclean all
 

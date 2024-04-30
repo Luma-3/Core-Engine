@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 23:46:44 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/28 00:34:11 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/30 14:02:53 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <libft.h>
 
-# define LOGFILE "./../logs/logfile_coreEngine.log"
+# define LOGFILE "./logs/logfile_coreEngine.log"
 # define LOGFLAGS O_TRUNC
 # define LOGFILE_MODE 0644
 # define LOGLEVEL DEBUG

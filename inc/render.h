@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:04:30 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/29 14:21:34 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/30 12:24:37 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,10 @@ void	pixel_put(t_img *img, t_coord *coord, int color);
 void	copy_pixel(t_img *dst, t_img *src, t_coord *dst_c, t_coord *src_c);
 
 int		create_trgb(int t, int r, int g, int b);
-
-int		init_renderer(void);
-
+ 
 t_img	*init_img(size_t width, size_t height);
 
-int	renderer(void);
+int		renderer(void);
 
 void	render_2d(t_img *buffer);
 

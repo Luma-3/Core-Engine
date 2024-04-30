@@ -6,13 +6,13 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 14:49:50 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/29 15:55:58 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/30 12:12:31 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core_engine.h"
 
-int	__draw_void(t_img *void_buf, int width, int height)
+static int	__draw_void(t_img *void_buf, int width, int height)
 {
 	t_coord	*coord;
 
@@ -33,13 +33,14 @@ int	__draw_void(t_img *void_buf, int width, int height)
 	return (SUCCESS);
 }
 
-int __init_double_buffering(t_engine *engine)
+static int	__init_double_buffering(t_engine *engine)
 {
 	engine->renderer->drawbuffer = init_img(engine->width, engine->height);
 	logdebug(__FILE__, __LINE__, "init_buffer renderer->drawbuffer");
 	if (!engine->renderer->drawbuffer)
 	{
-		logerror(__FILE__, __LINE__, "init_buffer failed (renderer->drawbuffer)");
+		logerror(__FILE__, __LINE__, "init_buffer failed \
+(renderer->drawbuffer)");
 		free(engine->renderer->voidbuffer);
 		free(engine->renderer);
 		return (FAILURE);
@@ -57,11 +58,8 @@ int __init_double_buffering(t_engine *engine)
 	return (SUCCESS);
 }
 
-int	init_renderer(void)
+int	__init_renderer(t_engine *engine)
 {
-	t_engine	*engine;
-
-	engine = get_engine();
 	engine->renderer = malloc(sizeof(t_renderer));
 	if (!engine->renderer)
 	{
@@ -72,7 +70,8 @@ int	init_renderer(void)
 	logdebug(__FILE__, __LINE__, "init_buffer renderer->voidbuffer");
 	if (!engine->renderer->voidbuffer)
 	{
-		logerror(__FILE__, __LINE__, "init_buffer failed (renderer->voidbuffer)");
+		logerror(__FILE__, __LINE__, "init_buffer failed \
+(renderer->voidbuffer)");
 		free(engine->renderer);
 		return (FAILURE);
 	}

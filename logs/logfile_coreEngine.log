@@ -25,9 +25,9 @@
 [DEBUG] srcs/initializer/read_config.c:81 - Config file parsed successfully
 [DEBUG] srcs/initializer/init_core.c:18 - mlx_init() called
 [DEBUG] srcs/initializer/init_core.c:27 - mlx_new_window() called
-[DEBUG] srcs/renderer/init_render.c:72 - init_buffer renderer->voidbuffer
+[DEBUG] srcs/renderer/init_render.c:70 - init_buffer renderer->voidbuffer
 [DEBUG] srcs/renderer/init_render.c:39 - init_buffer renderer->drawbuffer
-[DEBUG] srcs/renderer/init_render.c:48 - init_buffer renderer->vbuffer
+[DEBUG] srcs/renderer/init_render.c:49 - init_buffer renderer->vbuffer
 [INFO] srcs/object/camera.c:23 - new camera
 [DEBUG] srcs/closing/close.c:20 - mlx_destroy_window() called
 [DEBUG] srcs/closing/close.c:25 - mlx_destroy_display() called
