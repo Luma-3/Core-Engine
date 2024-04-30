@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:31:24 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/30 14:04:36 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:21:35 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 
 # define VOID_COLOR 0x0000FF
 
-# define OBJ_2D_MAX 300
+# define OBJ_2D_MAX 500
 
 typedef struct s_engine
 {

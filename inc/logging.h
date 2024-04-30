@@ -6,14 +6,14 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 23:46:44 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/30 14:02:53 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/30 15:45:49 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LOGGING_H
 # define LOGGING_H
 
-# include <libft.h>
+# include "libft.h"
 
 # define LOGFILE "./logs/logfile_coreEngine.log"
 # define LOGFLAGS O_TRUNC

@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/27 21:44:08 by jbrousse          #+#    #+#              #
-#    Updated: 2024/04/30 14:49:37 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/04/30 16:29:58 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,9 @@ SRC_OBJ_LIST	=	object.c \
 SRC_OBJ			=	$(addprefix $(SRC_OBJ_DIR), $(SRC_OBJ_LIST))
 
 SRC_RENDERER_DIR	=	renderer/
-SRC_RENDERER_LIST	=	renderer.c		\
+
+SRC_RENDERER_LIST	=	image_utils/image.c	\
+						renderer.c		\
 						frame.c			\
 						draw_utils.c	\
 						image.c			\

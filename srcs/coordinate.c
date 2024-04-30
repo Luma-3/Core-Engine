@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:30:06 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/29 18:12:33 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/30 19:11:54 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,20 @@ t_coord	*world_to_screen(t_coord *world)
 {
 	t_engine	*engine;
 	t_coord		*screen;
+	t_coord		offset_cam;
 
 	engine = get_engine();
 	screen = new_coord(0, 0);
 	if (!screen)
 		return (NULL);
-	screen->x = world->x + engine->camera->coord->x + (engine->width / 2);
-	screen->y = (engine->height / 2) - world->y + engine->camera->coord->y;
+	// tmp_cam.x = engine->camera->coord->x;
+	// tmp_cam.y = engine->camera->coord->y;
+	offset_cam.x = world->x + engine->camera->coord->x + (engine->width / 2);
+	offset_cam.y = (engine->height / 2) - world->y + engine->camera->coord->y;
+	screen->x = offset_cam.x * cos(-engine->camera->angle)
+		- offset_cam.y * sin(engine->camera->angle);
+	screen->y = offset_cam.x * sin(engine->camera->angle)
+		+ offset_cam.y * cos(-engine->camera->angle);
 	// printf("camera x: %f, y: %f\n", engine->camera->coord->x, engine->camera->coord->y);
 	return (screen);
 }
