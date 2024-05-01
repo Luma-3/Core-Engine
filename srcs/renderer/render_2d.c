@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:19:15 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/30 19:10:15 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/01 19:05:34 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,22 @@ static void	draw_obj_to_frame(t_img *img, t_img *buffer, t_coord *obj_s_coord)
 		obj_s_coord->x = coord_root.x;
 		while (obj_s_coord->x < img->height + coord_root.x)
 		{
-			src_coord.x = obj_s_coord->x - coord_root.x;
-			src_coord.y = obj_s_coord->y - coord_root.y;
-			dst_coord.x = obj_s_coord->x - (img->width / 2);
-			dst_coord.y = obj_s_coord->y - (img->height / 2);
+			src_coord.x = obj_s_coord->x - coord_root.x - (img->width / 2);
+			src_coord.y = obj_s_coord->y - coord_root.y - (img->height / 2);
+			cal_obj_dst.x = obj_s_coord->x * cos(engine->camera->angle)
+				- obj_s_coord->y * sin(engine->camera->angle);
+			cal_obj_dst.y = obj_s_coord->x * sin(engine->camera->angle)
+				+ obj_s_coord->y * cos(engine->camera->angle);
+			dst_coord.x = cal_obj_dst.x + (img->width / 2);
+			dst_coord.y = cal_obj_dst.y + (img->height / 2);
 			
 			// cal_obj_src.x = src_coord.x * cos(engine->camera->angle)
 			// 	- src_coord.y  * sin(engine->camera->angle);		
 			// cal_obj_src.y = src_coord.x * sin(engine->camera->angle)
 			// 	+ src_coord.y * cos(engine->camera->angle);
-			cal_obj_dst.x = dst_coord.x * cos(engine->camera->angle)
-				- dst_coord.y * sin(-engine->camera->angle);
-			cal_obj_dst.y = dst_coord.x * sin(engine->camera->angle)
-				+ dst_coord.y * cos(-engine->camera->angle);
 			
-			if (cal_obj_dst.x >= 0 && cal_obj_dst.y >= 0 && cal_obj_dst.x < buffer->width && cal_obj_dst.y < buffer->height)
-				copy_pixel(buffer, img, &cal_obj_dst, &src_coord);
+			if (dst_coord.x >= 0 && dst_coord.y >= 0 && dst_coord.x < buffer->width && dst_coord.y < buffer->height)
+				copy_pixel(buffer, img, &dst_coord, &src_coord);
 			obj_s_coord->x++;
 		}
 		obj_s_coord->y++;
