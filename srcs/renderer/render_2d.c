@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:19:15 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/01 19:05:34 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/02 15:32:21 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,60 +15,49 @@
 #include "object.h"
 #include "render.h"
 
-static void	draw_obj_to_frame(t_img *img, t_img *buffer, t_coord *obj_s_coord)
-{
-	t_coord	coord_root;
-	t_coord	dst_coord;
-	t_coord	src_coord;
-	// t_coord	cal_obj_src;
-	t_coord	cal_obj_dst;
-	t_engine *engine;
 
-	coord_root.x = obj_s_coord->x;
-	coord_root.y = obj_s_coord->y;
-	engine = get_engine();
-	while (obj_s_coord->y < img->width + coord_root.y)
+static void	draw_obj_to_frame(t_img *img, t_img *buffer, t_coord *obj_coord, float cam_angle)
+{
+	t_coord	pixel_coord;
+	t_coord pixel_offset;
+	t_coord dst_coord;
+	t_coord rotate_obj;
+
+	pixel_coord.y = 0;
+	while (pixel_coord.y < img->height)
 	{
-		obj_s_coord->x = coord_root.x;
-		while (obj_s_coord->x < img->height + coord_root.x)
+		pixel_coord.x = 0;
+		pixel_offset.y = obj_coord->y - (img->height / 2);
+		while (pixel_coord.x < img->width)
 		{
-			src_coord.x = obj_s_coord->x - coord_root.x - (img->width / 2);
-			src_coord.y = obj_s_coord->y - coord_root.y - (img->height / 2);
-			cal_obj_dst.x = obj_s_coord->x * cos(engine->camera->angle)
-				- obj_s_coord->y * sin(engine->camera->angle);
-			cal_obj_dst.y = obj_s_coord->x * sin(engine->camera->angle)
-				+ obj_s_coord->y * cos(engine->camera->angle);
-			dst_coord.x = cal_obj_dst.x + (img->width / 2);
-			dst_coord.y = cal_obj_dst.y + (img->height / 2);
-			
-			// cal_obj_src.x = src_coord.x * cos(engine->camera->angle)
-			// 	- src_coord.y  * sin(engine->camera->angle);		
-			// cal_obj_src.y = src_coord.x * sin(engine->camera->angle)
-			// 	+ src_coord.y * cos(engine->camera->angle);
-			
+			pixel_offset.x = obj_coord->x - (img->width / 2);
+			rotate_obj.x = pixel_coord.x * cos(cam_angle) - pixel_coord.y * sin(cam_angle);
+			rotate_obj.y = pixel_coord.x * sin(cam_angle) + pixel_coord.y * cos(cam_angle);
+			dst_coord.x = pixel_offset.x + rotate_obj.x;
+			dst_coord.y = pixel_offset.y - rotate_obj.y;
 			if (dst_coord.x >= 0 && dst_coord.y >= 0 && dst_coord.x < buffer->width && dst_coord.y < buffer->height)
-				copy_pixel(buffer, img, &dst_coord, &src_coord);
-			obj_s_coord->x++;
+				copy_pixel(buffer, img, &dst_coord, &pixel_coord);
+			pixel_coord.x++;
 		}
-		obj_s_coord->y++;
+		pixel_coord.y++;
 	}
 }
 
-// static bool	culling_obj(int	x, int y, int width, int height)
-// {
-// 	t_engine	*engine;
+static bool	culling_obj(int	x, int y, int width, int height)
+{
+	t_engine	*engine;
 
-// 	engine = get_engine();
-// 	if (x - (width / 2) > engine->width || x + (width / 2) < 0)
-// 	{
-// 		return (true);
-// 	}
-// 	if (y - (height / 2) > engine->height || y + (height / 2) < 0)
-// 	{
-// 		return (true);
-// 	}
-// 	return (false);
-// }
+	engine = get_engine();
+	if (x - (width / 2) > engine->width + 1 || x + (width / 2) < -1)
+	{
+		return (true);
+	}
+	if (y - (height / 2) > engine->height + 1 || y + (height / 2) < -1)
+	{
+		return (true);
+	}
+	return (false);
+}
 
 void	render_2d(t_img *buffer)
 {
@@ -83,9 +72,9 @@ void	render_2d(t_img *buffer)
 		if (engine->object_2d[index] != NULL)
 		{
 			coord = world_to_screen(engine->object_2d[index]->coord);
-			if (true)
+			if (coord != NULL && !culling_obj(coord->x, coord->y, engine->object_2d[index]->img->width, engine->object_2d[index]->img->height))
 			{
-				draw_obj_to_frame(engine->object_2d[index]->img, buffer, coord);
+				draw_obj_to_frame(engine->object_2d[index]->img, buffer, coord, engine->camera->angle);
 			}
 			free_coord(coord);
 		}

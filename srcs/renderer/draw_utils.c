@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:00:19 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/29 16:41:21 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/02 15:44:44 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ int	create_trgb(int t, int r, int g, int b)
 {
 	return (t << 24 | r << 16 | g << 8 | b);
 }
+
+// interpolation for hole in the object when rotating
+
+// Anti-aliasing for object rendering
 
 void	pixel_put(t_img *img, t_coord *coord, int color)
 {
