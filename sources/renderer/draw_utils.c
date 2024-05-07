@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:00:19 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/02 15:44:44 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/07 13:39:59 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	create_trgb(int t, int r, int g, int b)
 
 // Anti-aliasing for object rendering
 
-void	pixel_put(t_img *img, t_coord *coord, int color)
+void	pixel_put(t_render2d *img, t_vector2 *coord, int color)
 {
 	int		offset;
 
@@ -31,7 +31,8 @@ void	pixel_put(t_img *img, t_coord *coord, int color)
 	*(unsigned int *)(img->addr + offset) = color;
 }
 
-void	copy_pixel(t_img *dst, t_img *src, t_coord *dst_c, t_coord *src_c)
+void	copy_pixel(t_render2d *dst, t_render2d *src,
+	t_vector2 *dst_c, t_vector2 *src_c)
 {
 	int	color;
 	int	offset;

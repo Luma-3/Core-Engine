@@ -11,6 +11,7 @@
 		"deque": "c",
 		"vector": "c",
 		"string_view": "c",
-		"keysym.h": "c"
+		"keysym.h": "c",
+		"vectorft.h": "c"
 	}
 }

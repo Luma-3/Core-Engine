@@ -6,36 +6,33 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 14:49:50 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/30 12:12:31 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/07 16:06:44 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core_engine.h"
 
-static int	__draw_void(t_img *void_buf, int width, int height)
+static int	__draw_void(t_render2d *void_buf, int width, int height)
 {
-	t_coord	*coord;
+	t_vector2	coord;
 
 	coord = new_coord(0, 0);
-	if (!coord)
-		return (FAILURE);
-	while (coord->y < height)
+	while (coord.y < height)
 	{
-		coord->x = 0;
-		while (coord->x < width)
+		coord.x = 0;
+		while (coord.x < width)
 		{
-			pixel_put(void_buf, coord, VOID_COLOR);
-			coord->x++;
+			pixel_put(void_buf, &coord, VOID_COLOR);
+			coord.x++;
 		}
-		coord->y++;
+		coord.y++;
 	}
-	free_coord(coord);
 	return (SUCCESS);
 }
 
 static int	__init_double_buffering(t_engine *engine)
 {
-	engine->renderer->drawbuffer = init_img(engine->width, engine->height);
+	*(engine->renderer->drawbuffer) = init_render2d(engine->width, engine->height);
 	logdebug(__FILE__, __LINE__, "init_buffer renderer->drawbuffer");
 	if (!engine->renderer->drawbuffer)
 	{
@@ -45,7 +42,7 @@ static int	__init_double_buffering(t_engine *engine)
 		free(engine->renderer);
 		return (FAILURE);
 	}
-	engine->renderer->vbuffer = init_img(engine->width, engine->height);
+	*(engine->renderer->vbuffer) = init_render2d(engine->width, engine->height);
 	logdebug(__FILE__, __LINE__, "init_buffer renderer->vbuffer");
 	if (!engine->renderer->vbuffer)
 	{
@@ -60,13 +57,13 @@ static int	__init_double_buffering(t_engine *engine)
 
 int	__init_renderer(t_engine *engine)
 {
-	engine->renderer = malloc(sizeof(t_renderer));
+	engine->renderer = malloc(sizeof(t_buffers));
 	if (!engine->renderer)
 	{
 		logerror(__FILE__, __LINE__, "malloc() failed");
 		return (FAILURE);
 	}
-	engine->renderer->voidbuffer = init_img(engine->width, engine->height);
+	*(engine->renderer->voidbuffer) = init_render2d(engine->width, engine->height);
 	logdebug(__FILE__, __LINE__, "init_buffer renderer->voidbuffer");
 	if (!engine->renderer->voidbuffer)
 	{

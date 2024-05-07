@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:31:24 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/30 16:21:35 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/07 14:49:36 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_engine
 	int			height;
 	char		*title;
 	t_camera	*camera;
-	t_renderer	*renderer;
+	t_buffers	*renderer;
 	t_object2d	*object_2d[OBJ_2D_MAX];
 }			t_engine;
 

@@ -1,41 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   object.c                                           :+:      :+:    :+:   */
+/*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/28 17:18:18 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/29 12:53:02 by jbrousse         ###   ########.fr       */
+/*   Created: 2024/04/29 17:53:07 by jbrousse          #+#    #+#             */
+/*   Updated: 2024/05/07 14:48:11 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "object.h"
 #include "core_engine.h"
 
-t_object2d	*new_obj2d(char *name, unsigned int id)
+t_camera	*new_camera(void)
 {
-	t_object2d	*object;
+	t_camera	*camera;
 	t_engine	*engine;
 
 	engine = get_engine();
-	object = (t_object2d *)malloc(sizeof(t_object2d));
-	if (!object)
+	camera = ft_calloc(1, sizeof(t_camera));
+	loginfo(__FILE__, __LINE__, "new camera");
+	if (!camera)
 	{
 		logerror(__FILE__, __LINE__, "malloc() failed");
 		return (NULL);
 	}
-	ft_bzero(object, sizeof(t_object2d));
-	object->coord = new_coord(0, 0);
-	if (!object->coord)
-		return (NULL);
-	object->name = strdup(name);
-	if (!object->name)
-	{
-		logerror(__FILE__, __LINE__, "strdup() failed");
-		return (NULL);
-	}
-	object->id = id;
-	engine->object_2d[id] = object;
-	return (object);
+	camera->coord = new_coord(0, 0);
+	engine->camera = camera;
+	return (camera);
 }

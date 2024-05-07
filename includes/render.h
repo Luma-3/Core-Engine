@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:04:30 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/30 16:08:11 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/07 16:17:57 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,31 +18,40 @@
 # include <math.h>
 # include <stdlib.h>
 
-typedef struct s_img
+typedef struct s_triangle
 {
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		l_length;
-	int		endian;
-	int		width;
-	int		height;
-}	t_img;
+	t_vector2		coord[3];
+}				t_triangle;
 
-typedef struct s_renderer
+typedef struct s_render2d
 {
-	t_img	*vbuffer;
-	t_img	*drawbuffer;
-	t_img	*voidbuffer;
-}	t_renderer;
+	void		*img;
+	t_triangle	triangle[2];
+	char		*addr;
+	int			bpp;
+	int			l_length;
+	int			endian;
+	t_vector2	size;
+}	t_render2d;
 
-void	pixel_put(t_img *img, t_coord *coord, int color);
+typedef struct s_buffers
+{
+	t_render2d	*vbuffer;
+	t_render2d	*drawbuffer;
+	t_render2d	*voidbuffer;
+}	t_buffers;
 
-void	copy_pixel(t_img *dst, t_img *src, t_coord *dst_c, t_coord *src_c);
+int			double_buffering(t_render2d **front, t_render2d **back,
+				t_render2d *voidbuffer);
 
-int		create_trgb(int t, int r, int g, int b);
+void		pixel_put(t_render2d *img, t_vector2 *coord, int color);
 
-t_img	*init_img(size_t width, size_t height);
+void		copy_pixel(t_render2d *dst, t_render2d *src,
+				t_vector2 *dst_c, t_vector2 *src_c);
+
+int			create_trgb(int t, int r, int g, int b);
+
+t_render2d	init_render2d(size_t width, size_t height);
 
 /**
  * @brief Initialize an image from a xpm file
@@ -53,12 +62,14 @@ t_img	*init_img(size_t width, size_t height);
  * @warning If get addr failed, the function will log a warning and not 
  * return NULL ! Check by yourself !!
 */
-t_img	*init_xmp_img(const char *file);
+t_render2d	init_xmp_render2d(const char *file);
 
-int		renderer(void);
+int			renderer(void);
 
-void	render_2d(t_img *buffer);
+void		render_2d(t_render2d *buffer);
 
-void	put_frame(t_img *frame);
+void		put_frame(t_render2d *frame);
+
+void		__cal_triangle(t_render2d *render, t_vector2 coord, t_vector2 size);
 
 #endif

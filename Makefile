@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/27 21:44:08 by jbrousse          #+#    #+#              #
-#    Updated: 2024/04/30 16:29:58 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/05/07 16:02:09 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,65 +29,73 @@ MLX			= $(MLX_DIR)libmlx.a
 MLX_DIR		= libs/minilibx/
 MLX_INC		= $(MLX_DIR)
 
+VECTORFT	= $(VECTORFT_DIR)vectorft.a
+VECTORFT_DIR= libs/vectorft/
+VECTORFT_INC= $(VECTORFT_DIR)includes/
+
 ##############
 ##  SOURCE	##
 ##############
 
-SRC_DIR			=	srcs/
+SRC_DIR				=	sources/
 
-SRC_CLOSING_DIR	=	closing/
-SRC_CLOSING_LIST	=	close.c
-SRC_CLOSING		=	$(addprefix $(SRC_CLOSING_DIR), $(SRC_CLOSING_LIST))
+SRC_CLOSING_DIR		=	stop_components/
+SRC_CLOSING_LIST	=	stop_engine.c
+SRC_CLOSING			=	$(addprefix $(SRC_CLOSING_DIR), $(SRC_CLOSING_LIST))
 
-SRC_INIT_DIR	=	initializer/
-SRC_INIT_LIST	=	init_core.c		\
-					parse_config.c	\
-					read_config.c
-SRC_INIT		=	$(addprefix $(SRC_INIT_DIR), $(SRC_INIT_LIST))
+SRC_INIT_DIR		=	initializer/
+SRC_INIT_LIST		=	init_engine.c	\
+						init_render.c	\
+						parse_config.c	\
+						read_config.c
+SRC_INIT			=	$(addprefix $(SRC_INIT_DIR), $(SRC_INIT_LIST))
 
-SRC_IO_DIR		=	io/
-SRC_IO_LIST		=	event.c
-SRC_IO			=	$(addprefix $(SRC_IO_DIR), $(SRC_IO_LIST))
+SRC_IO_DIR			=	io/
+SRC_IO_LIST			=	event.c
+SRC_IO				=	$(addprefix $(SRC_IO_DIR), $(SRC_IO_LIST))
 
-SRC_LOGGING		=	logger/
-SRC_LOG_LIST	=	logging.c		\
-					logging_msg.c
-SRC_LOG			=	$(addprefix $(SRC_LOGGING), $(SRC_LOG_LIST))
+SRC_LOGGING			=	logger/
+SRC_LOG_LIST		=	logging.c		\
+						logging_msg.c
+SRC_LOG				=	$(addprefix $(SRC_LOGGING), $(SRC_LOG_LIST))
 
-SRC_OBJ_DIR		=	object/
-SRC_OBJ_LIST	=	object.c \
-					camera.c
-SRC_OBJ			=	$(addprefix $(SRC_OBJ_DIR), $(SRC_OBJ_LIST))
+SRC_OBJ_DIR			=	object/
+SRC_OBJ_LIST		=	object.c \
+						camera.c
+SRC_OBJ				=	$(addprefix $(SRC_OBJ_DIR), $(SRC_OBJ_LIST))
 
 SRC_RENDERER_DIR	=	renderer/
 
-SRC_RENDERER_LIST	=	image_utils/image.c	\
-						renderer.c		\
-						frame.c			\
+SRC_2D_DIR			=	2d/
+SRC_2D_LIST			=	init_render2d.c	\
+						render_2d.c	
+SRC_2D				=	$(addprefix $(SRC_2D_DIR), $(SRC_2D_LIST))
+
+SRC_RENDERER_LIST	=	$(SRC_2D)		\
 						draw_utils.c	\
-						image.c			\
-						render_2d.c		\
-						init_render.c
+						frame.c			\
+						renderer.c
 SRC_RENDERER		=	$(addprefix $(SRC_RENDERER_DIR), $(SRC_RENDERER_LIST))
 
-SRC_LIST		=	core_engine.c	\
-					loop.c			\
-					coordinate.c	\
-					$(SRC_LOG)		\
-					$(SRC_OBJ)		\
-					$(SRC_INIT)		\
-					$(SRC_IO)		\
-					$(SRC_CLOSING)	\
-					$(SRC_RENDERER)	
-SRC				=	$(addprefix $(SRC_DIR), $(SRC_LIST))
+SRC_LIST			=	get_engine.c	\
+						loop.c			\
+						coordinate.c	\
+						$(SRC_LOG)		\
+						$(SRC_OBJ)		\
+						$(SRC_INIT)		\
+						$(SRC_IO)		\
+						$(SRC_CLOSING)	\
+						$(SRC_RENDERER)	
+SRC					=	$(addprefix $(SRC_DIR), $(SRC_LIST))
 
 ################
 ##	INCLUDES  ##
 ################
 
-INC_LST		=	./inc/			\
-				./libs/minilibx/	\
-				./libs/libft/includes/
+INC_LST		=	./includes/		\
+				./$(MLX_INC)	\
+				./$(LIBFT_INC)	\
+				./$(VECTORFT_INC)
 INCLUDES	=	$(addprefix -I, $(INC_LST))			
 
 ################
@@ -151,13 +159,16 @@ endef
 ##	RULES  ##
 #############
 
-all: $(MLX) $(LIBFT) $(NAME) 
+all: $(MLX) $(LIBFT) $(VECTORFT) $(NAME) 
 
 $(MLX):
-	@make -C $(MLX_DIR)
+	@make -sC $(MLX_DIR)
 
 $(LIBFT):
-	@make -C $(LIBFT_DIR)
+	@make -sC $(LIBFT_DIR)
+
+$(VECTORFT):
+	@make -sC $(VECTORFT_DIR)
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c
 	@mkdir -p $(dir $@)
@@ -169,6 +180,7 @@ $(OBJ_DIR)%.o : $(SRC_DIR)%.c
 $(NAME): $(OBJ)
 	@ar -x $(LIBFT) --output=$(OBJ_DIR)
 	@ar -x $(MLX) --output=$(OBJ_DIR)
+	@ar -x $(VECTORFT) --output=$(OBJ_DIR)
 	@ar -rc $(NAME) $(OBJ) $(OBJ_DIR)*.o
 	@echo "\033[2K$(COLOR_ORANGE)$(BOLD)Compilation complete ! $(COLOR_BLUE)$(BOLD)$(NAME) is Ready !$(COLOR_RESET)"
 
@@ -177,6 +189,7 @@ clean:
 	@echo "$(COLOR_RED)$(BOLD)Delete $(NAME) objects$(COLOR_RESET)"
 	@make -C $(LIBFT_DIR) clean
 	@make -C $(MLX_DIR) clean
+	@make -C $(VECTORFT_DIR) clean
 
 fclean: clean
 	@rm -f $(NAME)
@@ -185,6 +198,8 @@ fclean: clean
 	@echo "$(COLOR_RED)$(BOLD)Delete $(LIBFT)$(COLOR_RESET)"
 	@rm -f $(MLX)
 	@echo "$(COLOR_RED)$(BOLD)Delete $(MLX)$(COLOR_RESET)"
+	@rm -f $(VECTORFT)
+	@echo "$(COLOR_RED)$(BOLD)Delete $(VECTORFT)$(COLOR_RESET)"
 
 re: fclean all
 
