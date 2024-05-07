@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 14:49:50 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/07 16:06:44 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/07 17:28:34 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	__draw_void(t_render2d *void_buf, int width, int height)
 		coord.x = 0;
 		while (coord.x < width)
 		{
-			pixel_put(void_buf, &coord, VOID_COLOR);
+			pixel_put(void_buf, coord, VOID_COLOR);
 			coord.x++;
 		}
 		coord.y++;
@@ -32,7 +32,7 @@ static int	__draw_void(t_render2d *void_buf, int width, int height)
 
 static int	__init_double_buffering(t_engine *engine)
 {
-	*(engine->renderer->drawbuffer) = init_render2d(engine->width, engine->height);
+	engine->renderer->drawbuffer = malloc(sizeof(t_render2d));
 	logdebug(__FILE__, __LINE__, "init_buffer renderer->drawbuffer");
 	if (!engine->renderer->drawbuffer)
 	{
@@ -42,7 +42,7 @@ static int	__init_double_buffering(t_engine *engine)
 		free(engine->renderer);
 		return (FAILURE);
 	}
-	*(engine->renderer->vbuffer) = init_render2d(engine->width, engine->height);
+	engine->renderer->vbuffer = malloc(sizeof(t_render2d));
 	logdebug(__FILE__, __LINE__, "init_buffer renderer->vbuffer");
 	if (!engine->renderer->vbuffer)
 	{
@@ -52,6 +52,8 @@ static int	__init_double_buffering(t_engine *engine)
 		free(engine->renderer);
 		return (FAILURE);
 	}
+	*(engine->renderer->drawbuffer) = init_render2d(engine->width, engine->height);
+	*(engine->renderer->vbuffer) = init_render2d(engine->width, engine->height);
 	return (SUCCESS);
 }
 
@@ -63,7 +65,7 @@ int	__init_renderer(t_engine *engine)
 		logerror(__FILE__, __LINE__, "malloc() failed");
 		return (FAILURE);
 	}
-	*(engine->renderer->voidbuffer) = init_render2d(engine->width, engine->height);
+	engine->renderer->voidbuffer = malloc(sizeof(t_render2d));
 	logdebug(__FILE__, __LINE__, "init_buffer renderer->voidbuffer");
 	if (!engine->renderer->voidbuffer)
 	{
@@ -72,6 +74,7 @@ int	__init_renderer(t_engine *engine)
 		free(engine->renderer);
 		return (FAILURE);
 	}
+	*(engine->renderer->voidbuffer) = init_render2d(engine->width, engine->height);
 	__draw_void(engine->renderer->voidbuffer, engine->width, engine->height);
 	mlx_put_image_to_window(engine->mlx, engine->win,
 		engine->renderer->voidbuffer->img, 0, 0);

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:19:15 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/07 16:16:05 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/07 17:59:53 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ static bool	culling_obj(int x, int y, int width, int height)
 	t_engine	*engine;
 
 	engine = get_engine();
-	if (x - (width / 2) > engine->width + 1 || x + (width / 2) < -1)
+	if (x - (width / 2) > engine->width || x + (width / 2) < 0)
 	{
 		return (true);
 	}
-	if (y - (height / 2) > engine->height + 1 || y + (height / 2) < -1)
+	if (y - (height / 2) > engine->height || y + (height / 2) < 0)
 	{
 		return (true);
 	}
@@ -35,7 +35,7 @@ void	get_min_max(t_vector2 *min, t_vector2 *max, t_triangle triangle)
 {
 	int	i;
 
-	i = 1;
+	i = 0;
 	*min = new_coord(triangle.coord[0].x, triangle.coord[0].y);
 	*max = new_coord(triangle.coord[0].x, triangle.coord[0].y);
 	while (i < 3)
@@ -60,7 +60,7 @@ static bool	is_inside_triangle(t_vector2 coord, t_triangle triangle)
 	int			i;
 
 	i = 0;
-	while(i < 3)
+	while (i < 3)
 	{
 		edge[i] = sub_vector2(triangle.coord[(i + 1) % 3], triangle.coord[i]);
 		v_p[i] = sub_vector2(coord, triangle.coord[i]);
@@ -68,11 +68,25 @@ static bool	is_inside_triangle(t_vector2 coord, t_triangle triangle)
 		i++;
 	}
 	if ((det[0] >= 0 && det[1] >= 0 && det[2] >= 0)
-		|| (det[0] < 0 && det[1] < 0 && det[2] < 0))
+		|| (det[0] <= 0 && det[1] <= 0 && det[2] <= 0))
 	{
 		return (true);
 	}
 	return (false);
+}
+
+t_triangle	triangle_to_screen(t_triangle triangle)
+{
+	t_triangle	screen_triangle;
+	int			i;
+
+	i = 0;
+	while (i < 3)
+	{
+		screen_triangle.coord[i] = world_to_screen(triangle.coord[i]);
+		i++;
+	}
+	return (screen_triangle);
 }
 
 static void	sweep_triangle(t_render2d *buffer, t_render2d *render, int index)
@@ -80,17 +94,20 @@ static void	sweep_triangle(t_render2d *buffer, t_render2d *render, int index)
 	t_vector2	min;
 	t_vector2	max;
 	t_vector2	coord;
+	t_triangle	triangle;
 
-	get_min_max(&min, &max, render->triangle[index]);
+	triangle = triangle_to_screen(render->triangle[index]);
+	get_min_max(&min, &max, triangle);
 	coord = new_coord(min.x, min.y);
 	while (coord.y < max.y)
 	{
 		coord.x = min.x;
 		while (coord.x < max.x)
 		{
-			if (is_inside_triangle(coord, render->triangle[index]))
+			if (is_inside_triangle(coord, triangle))
 			{
-				pixel_put(buffer, &coord, 0x00FF00);
+				if (coord.x > 0 && coord.y > 0 && coord.x < buffer->size.x && coord.y < buffer->size.y)
+					copy_pixel(buffer, render, coord, (t_vector2){0, 0});
 			}
 			coord.x++;
 		}
@@ -115,6 +132,7 @@ void	render_2d(t_render2d *buffer)
 					engine->object_2d[index]->render.size.x,
 					engine->object_2d[index]->render.size.y))
 			{
+				// printf("coord.x = %f, coord.y = %f\n", coord.x, coord.y);
 				sweep_triangle(buffer, &engine->object_2d[index]->render, 0);
 				sweep_triangle(buffer, &engine->object_2d[index]->render, 1);
 			}

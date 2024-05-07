@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:04:30 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/07 16:17:57 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/07 17:27:40 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ typedef struct s_buffers
 int			double_buffering(t_render2d **front, t_render2d **back,
 				t_render2d *voidbuffer);
 
-void		pixel_put(t_render2d *img, t_vector2 *coord, int color);
+void		pixel_put(t_render2d *img, t_vector2 coord, int color);
 
 void		copy_pixel(t_render2d *dst, t_render2d *src,
-				t_vector2 *dst_c, t_vector2 *src_c);
+				t_vector2 dst_c, t_vector2 src_c);
 
 int			create_trgb(int t, int r, int g, int b);
 

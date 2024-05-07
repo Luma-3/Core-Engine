@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:18:18 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/07 16:18:21 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/07 17:18:26 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 static void	change_coord(t_object2d *obj, t_vector2 coord)
 {
+	// printf("coord.x = %f, coord.y = %f\n", coord.x, coord.y);
+	// printf("obj->render.size.x = %f, obj->render.size.y = %f\n", obj->render.size.x, obj->render.size.y);
 	obj->coord = new_coord(coord.x, coord.y);
 	if (obj->render.img)
 		__cal_triangle(&obj->render, obj->coord, obj->render.size);
