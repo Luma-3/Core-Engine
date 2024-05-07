@@ -4,3 +4,6 @@
 [submodule "libs/libft"]
 	path = libs/libft
 	url = git@github.com:Luma-3/libft.git
+[submodule "libs/vectorft"]
+	path = libs/vectorft
+	url = git@github.com:Luma-3/Vectorft.git
