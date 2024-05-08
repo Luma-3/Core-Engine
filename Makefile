@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/27 21:44:08 by jbrousse          #+#    #+#              #
-#    Updated: 2024/05/07 16:02:09 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/05/08 14:46:51 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -159,7 +159,7 @@ endef
 ##	RULES  ##
 #############
 
-all: $(MLX) $(LIBFT) $(VECTORFT) $(NAME) 
+all: $(NAME)  
 
 $(MLX):
 	@make -sC $(MLX_DIR)
@@ -177,7 +177,7 @@ $(OBJ_DIR)%.o : $(SRC_DIR)%.c
 	@$(eval COMPILED_SRCS=$(shell expr $(COMPILED_SRCS) + 1))
 	@$(call print_progress,$(COMPILED_SRCS),$(TOTAL_SRCS), $<)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(MLX) $(LIBFT) $(VECTORFT)
 	@ar -x $(LIBFT) --output=$(OBJ_DIR)
 	@ar -x $(MLX) --output=$(OBJ_DIR)
 	@ar -x $(VECTORFT) --output=$(OBJ_DIR)

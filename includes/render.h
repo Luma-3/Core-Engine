@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:04:30 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/07 17:27:40 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/08 16:11:42 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,9 @@
 # include <math.h>
 # include <stdlib.h>
 
-typedef struct s_triangle
-{
-	t_vector2		coord[3];
-}				t_triangle;
-
 typedef struct s_render2d
 {
 	void		*img;
-	t_triangle	triangle[2];
 	char		*addr;
 	int			bpp;
 	int			l_length;
@@ -69,7 +63,5 @@ int			renderer(void);
 void		render_2d(t_render2d *buffer);
 
 void		put_frame(t_render2d *frame);
-
-void		__cal_triangle(t_render2d *render, t_vector2 coord, t_vector2 size);
 
 #endif
