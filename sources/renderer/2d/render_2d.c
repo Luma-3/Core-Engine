@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_2d.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: monsieurc <monsieurc@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:19:15 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/08 17:09:10 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/08 19:56:44 by monsieurc        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,23 @@ static void draw_obj_to_frame(t_render2d *buffer, t_render2d *obj_render, t_vect
 	t_vector2 pixel_offset;
 	t_vector2 dst_coord;
 	t_vector2 rotate_obj;
+	t_vector2	obj_angle;
+	float		scale;
 
+	scale = 0.25;
+	(void)scale;
 	pixel_coord.y = 0;
+	obj_angle.x = cos(angle);
+	obj_angle.y = sin(angle);
 	while (pixel_coord.y < obj_render->size.y)
 	{
 		pixel_coord.x = 0;
-		pixel_offset.y = coord->y - (obj_render->size.y / 2);
 		while (pixel_coord.x < obj_render->size.x)
 		{
-			pixel_offset.x = coord->x - (obj_render->size.x / 2);
-			rotate_obj.x = (pixel_coord.x - (obj_render->size.x / 2)) * cos(angle) - (pixel_coord.y - (obj_render->size.y / 2)) * sin(angle);
-			rotate_obj.y = (pixel_coord.x - (obj_render->size.x / 2)) * sin(angle) + (pixel_coord.y - (obj_render->size.y / 2)) * cos(angle);
+			pixel_offset.x = pixel_coord.x - (obj_render->size.x / 2);
+			pixel_offset.y = pixel_coord.y - (obj_render->size.y / 2);
+			rotate_obj.x = pixel_offset.x * obj_angle.x - pixel_offset.y * obj_angle.y;
+			rotate_obj.y = pixel_offset.x * obj_angle.y + pixel_offset.y * obj_angle.x;
 			dst_coord.x = rotate_obj.x + coord->x;
 			dst_coord.y = rotate_obj.y + coord->y;
 			if (dst_coord.x >= 0 && dst_coord.y >= 0 && dst_coord.x < buffer->size.x && dst_coord.y < buffer->size.y)
