@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
+#    By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/27 21:44:08 by jbrousse          #+#    #+#              #
-#    Updated: 2024/05/08 14:46:51 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/05/09 18:09:54 by antgabri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,8 @@ SRC_INIT_LIST		=	init_engine.c	\
 SRC_INIT			=	$(addprefix $(SRC_INIT_DIR), $(SRC_INIT_LIST))
 
 SRC_IO_DIR			=	io/
-SRC_IO_LIST			=	event.c
+SRC_IO_LIST			=	event.c			\
+						keys_press.c
 SRC_IO				=	$(addprefix $(SRC_IO_DIR), $(SRC_IO_LIST))
 
 SRC_LOGGING			=	logger/
@@ -68,7 +69,8 @@ SRC_RENDERER_DIR	=	renderer/
 
 SRC_2D_DIR			=	2d/
 SRC_2D_LIST			=	init_render2d.c	\
-						render_2d.c	
+						render_2d.c		\
+						debug_line.c
 SRC_2D				=	$(addprefix $(SRC_2D_DIR), $(SRC_2D_LIST))
 
 SRC_RENDERER_LIST	=	$(SRC_2D)		\

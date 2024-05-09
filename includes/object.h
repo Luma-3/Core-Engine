@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 16:58:08 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/08 16:11:17 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/09 18:13:30 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,11 @@ typedef struct s_object2d
 	int					id;
 	t_vector2			coord;
 	unsigned int		layer;
+	float				scale;
 	float				angle;
 	t_render2d			render;
+	t_vector2			d_point_start;
+	t_vector2			d_point_end;
 }				t_object2d;
 
 typedef struct s_camera
@@ -40,5 +43,7 @@ typedef struct s_camera
 t_object2d	*new_obj2d(char *name, unsigned int id);
 
 t_camera	*new_camera(void);
+
+void		draw_rays(t_object2d *obj, t_vector2 start, t_vector2 end);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:04:30 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/08 16:11:42 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/09 18:13:42 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,7 @@ int			renderer(void);
 void		render_2d(t_render2d *buffer);
 
 void		put_frame(t_render2d *frame);
+
+void		draw_line(int x1, int y1, int x2, int y2, t_render2d *buffer);
 
 #endif

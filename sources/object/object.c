@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:18:18 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/08 16:23:55 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/09 12:42:17 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_object2d	*new_obj2d(char *name, unsigned int id)
 		return (NULL);
 	}
 	object->id = id;
+	object->scale = 1;
 	engine->object_2d[id] = object;
 	return (object);
 }

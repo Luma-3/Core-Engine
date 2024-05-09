@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core_engine.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:31:24 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/07 14:49:36 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/09 15:29:05 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 
 # define OBJ_2D_MAX 500
 
+# define PI 3.14159265359
+
 typedef struct s_engine
 {
 	void		*mlx;
@@ -43,16 +45,18 @@ typedef struct s_engine
 	int			width;
 	int			height;
 	char		*title;
+	t_keys		keys;
 	t_camera	*camera;
 	t_buffers	*renderer;
 	t_object2d	*object_2d[OBJ_2D_MAX];
+	int			(*loop_f)(void *);
 }			t_engine;
 
 t_engine	*get_engine(void);
 
 int			init_engine(void);
 
-void		loop(void);
+void		loop(int (*f)(void *), void *param);
 
 int			parse_config(t_engine *engine, t_list *config);
 

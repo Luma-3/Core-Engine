@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_2d.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: monsieurc <monsieurc@student.42.fr>        +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:19:15 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/08 19:56:44 by monsieurc        ###   ########.fr       */
+/*   Updated: 2024/05/09 18:14:34 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,37 +31,36 @@ static bool	culling_obj(int x, int y, int width, int height)
 	return (false);
 }
 
-static void draw_obj_to_frame(t_render2d *buffer, t_render2d *obj_render, t_vector2 *coord, float angle)
+static void draw_obj_to_frame(t_render2d *buffer, t_object2d *obj, t_vector2 *coord, float angle)
 {
 	t_vector2 pixel_coord;
 	t_vector2 pixel_offset;
 	t_vector2 dst_coord;
 	t_vector2 rotate_obj;
 	t_vector2	obj_angle;
-	float		scale;
 
-	scale = 0.25;
-	(void)scale;
+
 	pixel_coord.y = 0;
-	obj_angle.x = cos(angle);
+	obj_angle.x = cos(angle) ;
 	obj_angle.y = sin(angle);
-	while (pixel_coord.y < obj_render->size.y)
+	while (pixel_coord.y < obj->render.size.y)
 	{
 		pixel_coord.x = 0;
-		while (pixel_coord.x < obj_render->size.x)
+		while (pixel_coord.x < obj->render.size.x)
 		{
-			pixel_offset.x = pixel_coord.x - (obj_render->size.x / 2);
-			pixel_offset.y = pixel_coord.y - (obj_render->size.y / 2);
+			pixel_offset.x = (pixel_coord.x - (obj->render.size.x / 2)) * obj->scale;
+			pixel_offset.y = (pixel_coord.y - (obj->render.size.y / 2)) * obj->scale;
 			rotate_obj.x = pixel_offset.x * obj_angle.x - pixel_offset.y * obj_angle.y;
 			rotate_obj.y = pixel_offset.x * obj_angle.y + pixel_offset.y * obj_angle.x;
-			dst_coord.x = rotate_obj.x + coord->x;
-			dst_coord.y = rotate_obj.y + coord->y;
+			dst_coord.x = (rotate_obj.x + coord->x );
+			dst_coord.y = (rotate_obj.y + coord->y);
 			if (dst_coord.x >= 0 && dst_coord.y >= 0 && dst_coord.x < buffer->size.x && dst_coord.y < buffer->size.y)
-				copy_pixel(buffer, obj_render, dst_coord, pixel_coord);
+				copy_pixel(buffer, &obj->render, dst_coord, pixel_coord);
 			pixel_coord.x++;
 		}
 		pixel_coord.y++;
 	}
+	draw_line(obj->d_point_start.x, obj->d_point_start.y, obj->d_point_end.x, obj->d_point_end.y, buffer);
 }
 
 void	render_2d(t_render2d *buffer)
@@ -81,7 +80,7 @@ void	render_2d(t_render2d *buffer)
 					engine->object_2d[index]->render.size.x,
 					engine->object_2d[index]->render.size.y))
 			{
-				draw_obj_to_frame(buffer, &engine->object_2d[index]->render, &coord, engine->object_2d[index]->angle);
+				draw_obj_to_frame(buffer, engine->object_2d[index], &coord, engine->object_2d[index]->angle);
 			}
 		}
 		index++;
