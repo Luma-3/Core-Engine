@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   renderer.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:04:30 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/10 16:56:40 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/05/10 17:04:30 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ typedef struct s_main_render
 	t_buffer	*b_front;
 	t_buffer	*b_back;
 	t_buffer	*b_void;
-	t_render2d	obj2d[MAX_2D_OBJ];
-	t_debug		debug[MAX_DEBUG_OBJ];
+	t_render2d	*obj2d[MAX_2D_OBJ];
+	t_debug		*debug[MAX_DEBUG_OBJ];
 }				t_mrender;
 
 t_mrender	*get_renderer(void);
