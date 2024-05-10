@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+         #
+#    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/27 21:44:08 by jbrousse          #+#    #+#              #
-#    Updated: 2024/05/09 18:09:54 by antgabri         ###   ########.fr        #
+#    Updated: 2024/05/10 15:55:56 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,10 +67,9 @@ SRC_OBJ				=	$(addprefix $(SRC_OBJ_DIR), $(SRC_OBJ_LIST))
 
 SRC_RENDERER_DIR	=	renderer/
 
-SRC_2D_DIR			=	2d/
+SRC_2D_DIR			=	2d_component/
 SRC_2D_LIST			=	init_render2d.c	\
-						render_2d.c		\
-						debug_line.c
+						basic_draw.c
 SRC_2D				=	$(addprefix $(SRC_2D_DIR), $(SRC_2D_LIST))
 
 SRC_RENDERER_LIST	=	$(SRC_2D)		\

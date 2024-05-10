@@ -12,6 +12,10 @@
 		"vector": "c",
 		"string_view": "c",
 		"keysym.h": "c",
-		"vectorft.h": "c"
+		"vectorft.h": "c",
+		"core.h": "c",
+		"logic.h": "c",
+		"renderer.h": "c",
+		"stdlib.h": "c"
 	}
 }

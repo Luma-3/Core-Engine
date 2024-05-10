@@ -6,22 +6,12 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:30:06 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/10 12:26:42 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/10 13:05:20 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "logic.h"
-#include "core_engine.h"
-
-t_vector3	vector3(float x, float y, float z)
-{
-	t_vector3	coord;
-
-	coord.x = x;
-	coord.y = y;
-	coord.z = z;
-	return (coord);
-}
+#include "core.h"
 
 t_vector3	world_to_screen(t_vector3 world)
 {

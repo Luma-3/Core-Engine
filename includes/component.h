@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   camera.c                                           :+:      :+:    :+:   */
+/*   component.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 17:53:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/10 15:22:48 by jbrousse         ###   ########.fr       */
+/*   Created: 2024/05/10 15:18:55 by jbrousse          #+#    #+#             */
+/*   Updated: 2024/05/10 15:21:09 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "object.h"
-#include "core.h"
+#ifndef COMPONENT_H
+# define COMPONENT_H
 
-t_camera	*new_camera(void)
+# include "vectorft.h"
+
+typedef struct s_transform
 {
-	t_camera	*camera;
-	t_engine	*engine;
+	t_vector2	pos;
+	t_vector2	rot;
+	t_vector2	scale;
+}				t_transform;
 
-	engine = get_engine();
-	camera = ft_calloc(1, sizeof(t_camera));
-	loginfo(__FILE__, __LINE__, "new camera");
-	if (!camera)
-	{
-		logerror(__FILE__, __LINE__, "malloc() failed");
-		return (NULL);
-	}
-	camera->coord = vector2(0, 0);
-	engine->camera = camera;
-	return (camera);
-}
+typedef struct s_render2d
+{
+	void		*img;
+	char		*addr;
+	int			bpp;
+	int			l_length;
+	int			endian;
+	t_vector2	size;
+	t_transform	*trans;
+	void		(*draw)(void *obj);
+}			t_render2d;
+
+#endif

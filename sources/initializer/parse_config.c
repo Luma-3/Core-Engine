@@ -6,11 +6,11 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 01:05:58 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/28 12:09:29 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/10 15:53:21 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "core_engine.h"
+#include "core.h"
 
 static int	hook_width(t_engine *engine, char *line)
 {

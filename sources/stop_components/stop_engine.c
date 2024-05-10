@@ -6,11 +6,11 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 11:17:11 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/07 13:01:22 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/10 15:54:24 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "core_engine.h"
+#include "core.h"
 
 int	__close_mlx(t_engine *engine)
 {

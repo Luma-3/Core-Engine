@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   debug_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 11:10:05 by antgabri          #+#    #+#             */
-/*   Updated: 2024/05/09 18:17:28 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/05/10 15:54:10 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "core_engine.h"
+#include "core.h"
 
 void    draw_line(int x1, int y1, int x2, int y2, t_render2d *buffer)
 {

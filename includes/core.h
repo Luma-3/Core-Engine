@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core_engine.h                                      :+:      :+:    :+:   */
+/*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:31:24 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/10 12:30:51 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/10 15:21:49 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CORE_ENGINE_H
-# define CORE_ENGINE_H
+#ifndef CORE_H
+# define CORE_H
 
 # include <errno.h>
 # include <mlx.h>
@@ -23,9 +23,9 @@
 
 # include "logging.h"
 # include "logic.h"
-# include "render.h"
+# include "renderer.h"
 # include "object.h"
-# include "key_bind.h"
+# include "input.h"
 
 # define FAILURE -1
 # define SUCCESS 0
@@ -47,8 +47,7 @@ typedef struct s_engine
 	char		*title;
 	t_keys		keys;
 	t_camera	*camera;
-	t_buffers	*renderer;
-	t_object2d	*object_2d[OBJ_2D_MAX];
+	t_mrender	*renderer;
 	int			(*loop_f)(void *);
 }			t_engine;
 

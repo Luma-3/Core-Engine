@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.h                                           :+:      :+:    :+:   */
+/*   renderer.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:04:30 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/10 12:31:31 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/10 15:53:03 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RENDER_H
-# define RENDER_H
+#ifndef RENDERER_H
+# define RENDERER_H
 
-# include "coord.h"
-# include "logging.h"
 # include <math.h>
 # include <stdlib.h>
 
-typedef struct s_render2d
+# include "logic.h"
+# include "logging.h"
+# include "component.h"
+# include "object.h"
+
+# define MAX_2D_OBJ 1000
+
+typedef struct s_buffer
 {
 	void		*img;
 	char		*addr;
@@ -26,53 +31,41 @@ typedef struct s_render2d
 	int			l_length;
 	int			endian;
 	t_vector2	size;
-	void		(*draw)(void *obj);
-}			t_render2d;
-
-typedef struct s_buffers
-{
-	t_render2d	*vbuffer;
-	t_render2d	*drawbuffer;
-	t_render2d	*voidbuffer;
-}	t_buffers;
+}				t_buffer;
 
 typedef struct s_main_render
 {
-	t_render2d	*b_front;
-	t_render2d	*b_back;
-	t_render2d	*b_void;
-	t_list		*render2d_cmp;
-}	t_main_render;
+	t_buffer	*b_front;
+	t_buffer	*b_back;
+	t_buffer	*b_void;
+	t_render2d	obj2d[MAX_2D_OBJ];
+}	t_mrender;
 
-int			double_buffering(t_render2d **front, t_render2d **back,
-				t_render2d *voidbuffer);
+t_mrender	*get_renderer(void);
 
-void		pixel_put(t_render2d *img, t_vector2 coord, int color);
+void		pixel_put(t_buffer *img, t_vector2 coord, int color);
 
-void		copy_pixel(t_render2d *dst, t_render2d *src,
+void		copy_pixel(t_buffer *dst, t_render2d *src,
 				t_vector2 dst_c, t_vector2 src_c);
 
 int			create_trgb(int t, int r, int g, int b);
 
-t_render2d	init_render2d(size_t width, size_t height);
+int			init_render2d(t_game_object *obj, size_t width, size_t height);
 
 /**
  * @brief Initialize an image from a xpm file
  * 
  * @param file The path to the xpm file
  * @return t_img* The image structure or NULL if an CRITICAL error occured
- * 
- * @warning If get addr failed, the function will log a warning and not 
- * return NULL ! Check by yourself !!
 */
-t_render2d	init_xmp_render2d(const char *file);
+int			init_xmp_render2d(t_game_object *obj, const char *file);
 
 int			renderer(void);
 
-void		render_2d(t_render2d *buffer);
+void		put_frame(t_buffer *frame);
 
-void		put_frame(t_render2d *frame);
+void		swap_buffers(t_buffer **front, t_buffer **back);
 
-void		draw_line(int x1, int y1, int x2, int y2, t_render2d *buffer);
+// void		draw_line(int x1, int y1, int x2, int y2, t_render2d *buffer);
 
 #endif

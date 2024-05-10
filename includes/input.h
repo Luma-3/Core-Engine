@@ -1,19 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_bind.h                                         :+:      :+:    :+:   */
+/*   input.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 18:01:48 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/09 14:41:42 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/05/10 12:52:04 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KEY_BIND_H
-# define KEY_BIND_H
-
-# include "core_engine.h"
+#ifndef INPUT_H
+# define INPUT_H
 
 # define KEY_UP 0xff52
 # define KEY_DOWN 0xff54

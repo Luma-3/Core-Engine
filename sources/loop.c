@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 23:13:02 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/09 15:03:00 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/05/10 15:22:06 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "core_engine.h"
-#include "render.h"
+#include "core.h"
+#include "renderer.h"
 
 int	loop_function(void *param)
 {

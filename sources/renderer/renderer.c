@@ -6,19 +6,55 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:29:25 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/07 13:07:03 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/10 15:59:22 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "core_engine.h"
-#include "render.h"
+#include "core.h"
+#include "renderer.h"
 
-int	renderer(void)
+static bool	culling_obj(int x, int y, int width, int height)
 {
 	t_engine	*engine;
 
 	engine = get_engine();
-	double_buffering(&(engine->renderer->drawbuffer),
-		&(engine->renderer->vbuffer), engine->renderer->voidbuffer);
+	if (x - (width / 2) > engine->width || x + (width / 2) < 0)
+	{
+		return (true);
+	}
+	if (y - (height / 2) > engine->height || y + (height / 2) < 0)
+	{
+		return (true);
+	}
+	return (false);
+}
+
+static void	iter_2d(t_render2d *render)
+{
+	int			i;
+
+	i = 0;
+	while (i < MAX_2D_OBJ)
+	{
+		if (culling_obj(render[i].trans->pos.x, render[i].trans->pos.y,
+				render[i].size.x, render[i].size.y) == false)
+		{
+			if (render[i].draw != NULL)
+				render[i].draw(&render[i]);
+		}
+		i++;
+	}
+}
+
+int	renderer(void)
+{
+	t_mrender	*renderer;
+
+	renderer = get_renderer();
+	ft_memcpy(renderer->b_back->addr, renderer->b_void->addr,
+		get_engine()->height * get_engine()->height * 4);
+	iter_2d(renderer->obj2d);
+	swap_buffers(&renderer->b_front, &renderer->b_back);
+	put_frame(renderer->b_front);
 	return (SUCCESS);
 }

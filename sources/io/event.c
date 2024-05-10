@@ -6,11 +6,11 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 11:19:27 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/29 12:39:01 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/10 15:53:36 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "core_engine.h"
+#include "core.h"
 
 int	key_hook(int (*f)(), void *param)
 {
