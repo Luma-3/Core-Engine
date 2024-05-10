@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:13:34 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/10 15:39:36 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/10 18:27:37 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,14 @@ static int	__get_addr(t_render2d *render)
 
 int	init_xmp_render2d(t_game_object *obj, const char *file)
 {
+	t_mrender	*renderer;
 	t_render2d	render;
 	int			width;
 	int			height;
 
+	renderer = get_renderer();
 	render.img = mlx_xpm_file_to_image(get_engine()->mlx, (char *)file,
-			&height, &width);
+			&width, &height);
 	if (!render.img)
 	{
 		logerror(__FILE__, __LINE__, "mlx_xpm_file_to_image() failed");
@@ -42,14 +44,18 @@ int	init_xmp_render2d(t_game_object *obj, const char *file)
 		return (FAILURE);
 	render.size = vector2(width, height);
 	render.trans = &obj->trans;
+	render.draw = NULL;
 	obj->render = render;
+	renderer->obj2d[obj->id] = &obj->render;
 	return (SUCCESS);
 }
 
 int	init_render2d(t_game_object *obj, size_t width, size_t height)
 {
 	t_render2d	render;
+	t_mrender	*renderer;
 
+	renderer = get_renderer();
 	render.img = mlx_new_image(get_engine()->mlx, width, height);
 	if (!render.img)
 	{
@@ -61,5 +67,7 @@ int	init_render2d(t_game_object *obj, size_t width, size_t height)
 	render.size = vector2(width, height);
 	render.trans = &obj->trans;
 	obj->render = render;
+	renderer->obj2d[obj->id] = &obj->render;
+	obj->render.draw = NULL;
 	return (SUCCESS);
 }

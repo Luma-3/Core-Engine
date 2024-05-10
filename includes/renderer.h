@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:04:30 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/10 17:04:30 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/10 17:41:26 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,7 @@ int			renderer(void);
 void		put_frame(t_buffer *frame);
 
 void		swap_buffers(t_buffer **front, t_buffer **back);
+
+void		basic_draw2d(void *self);
 
 #endif

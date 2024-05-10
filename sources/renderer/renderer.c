@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:29:25 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/10 16:46:29 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/10 18:56:14 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,32 +29,39 @@ static bool	culling_obj(int x, int y, int width, int height)
 	return (false);
 }
 
-static void	iter_2d(t_render2d *render)
+static void	iter_2d(t_render2d **render)
 {
 	int			i;
+	t_vector3	coord;
 
 	i = 0;
 	while (i < MAX_2D_OBJ)
 	{
-		if (culling_obj(render[i].trans->pos.x, render[i].trans->pos.y,
-				render[i].size.x, render[i].size.y) == false)
+		if (render[i] != NULL)
 		{
-			if (render[i].draw != NULL)
-				render[i].draw(&render[i]);
+			if (render[i]->draw != NULL)
+			{
+				coord = world_to_screen(vector3(render[i]->trans->pos.x, render[i]->trans->pos.y, 0));
+				if (culling_obj(coord.x, coord.y,
+					render[i]->size.x, render[i]->size.y) == false)
+				{
+					render[i]->draw(render[i]);
+				}
+			}
 		}
 		i++;
 	}
 }
 
-static void	iter_debug(t_debug *debug)
+static void	iter_debug(t_debug **debug)
 {
 	int	i;
 
 	i = 0;
 	while (i < MAX_DEBUG_OBJ)
 	{
-		if (debug[i].draw_ray != NULL && debug[i].active == true)
-			debug[i].draw_ray(&debug[i]);
+		if (debug[i] != NULL && debug[i]->draw_ray != NULL && debug[i]->active == true)
+			debug[i]->draw_ray(debug[i]);
 		i++;
 	}
 }
@@ -65,7 +72,7 @@ int	renderer(void)
 
 	renderer = get_renderer();
 	ft_memcpy(renderer->b_back->addr, renderer->b_void->addr,
-		get_engine()->height * get_engine()->height * 4);
+		get_engine()->width * get_engine()->height * 4);
 	iter_2d(renderer->obj2d);
 	iter_debug(renderer->debug);
 	swap_buffers(&renderer->b_front, &renderer->b_back);

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 14:49:50 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/10 15:52:03 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/10 19:04:55 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@ static t_buffer	*init_buffer(size_t width, size_t height)
 	if (!buffer)
 	{
 		logwarning(__FILE__, __LINE__, "init_buffer failed");
+		return (NULL);
+	}
+	buffer->img = mlx_new_image(get_engine()->mlx, width, height);
+	if (!buffer->img)
+	{
+		logwarning(__FILE__, __LINE__, "mlx_new_image() failed");
+		free(buffer);
 		return (NULL);
 	}
 	buffer->addr = mlx_get_data_addr(buffer->img, &buffer->bpp,
@@ -55,25 +62,6 @@ static int	__draw_void(t_buffer *void_buf, int width, int height)
 
 static int	__init_d_buffer(t_mrender *render, size_t width, size_t height)
 {
-	render->b_back = malloc(sizeof(t_render2d));
-	loginfo(__FILE__, __LINE__, "init_buffer backbuffer");
-	if (!render->b_back)
-	{
-		logwarning(__FILE__, __LINE__, "init_buffer failed (backbuffer)");
-		free(render->b_void);
-		render = NULL;
-		return (FAILURE);
-	}
-	render->b_front = malloc(sizeof(t_render2d));
-	loginfo(__FILE__, __LINE__, "init_buffer frontbuffer");
-	if (!render->b_front)
-	{
-		logwarning(__FILE__, __LINE__, "init_buffer failed (frontbuffer)");
-		free(render->b_void);
-		free(render->b_back);
-		render = NULL;
-		return (FAILURE);
-	}
 	render->b_back = init_buffer(width, height);
 	render->b_front = init_buffer(width, height);
 	return (SUCCESS);
@@ -85,7 +73,7 @@ int	__init_renderer(t_engine *engine)
 
 	renderer = get_renderer();
 	loginfo(__FILE__, __LINE__, "init_renderer");
-	renderer->b_void = malloc(sizeof(t_render2d));
+	renderer->b_void = malloc(sizeof(t_buffer));
 	loginfo(__FILE__, __LINE__, "init_buffer renderer->voidbuffer");
 	if (!renderer->b_void)
 	{
