@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 16:58:08 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/10 16:50:50 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/10 16:56:19 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,5 @@ void			draw_ray(void *obj);
 
 // void		draw_rays(t_object2d *obj, t_vector2 start, t_vector2 end);
 
+void		draw_line(int x1, int y1, int x2, int y2, t_render2d *buffer);
 #endif

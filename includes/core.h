@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:31:24 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/10 15:21:49 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/10 16:55:53 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 
 # define VOID_COLOR 0x0000FF
 
-# define OBJ_2D_MAX 500
+# define OBJ_2D_MAX 1000
 
 # define PI 3.14159265359
 
