@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 16:58:08 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/09 18:13:30 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/05/10 12:31:21 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,16 @@
 # include "coord.h"
 # include "logging.h"
 # include "render.h"
+
+typedef struct s_game_object
+{
+	char		*name;
+	int			id;
+	t_vector3	coord;
+	t_vector3	rotation;
+	t_vector3	scale;
+	t_render2d	render;
+}				t_game_object;
 
 typedef struct s_object2d
 {

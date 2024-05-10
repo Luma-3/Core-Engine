@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:04:30 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/09 18:13:42 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/05/10 12:31:31 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ typedef struct s_render2d
 	int			l_length;
 	int			endian;
 	t_vector2	size;
-}	t_render2d;
+	void		(*draw)(void *obj);
+}			t_render2d;
 
 typedef struct s_buffers
 {
@@ -34,6 +35,14 @@ typedef struct s_buffers
 	t_render2d	*drawbuffer;
 	t_render2d	*voidbuffer;
 }	t_buffers;
+
+typedef struct s_main_render
+{
+	t_render2d	*b_front;
+	t_render2d	*b_back;
+	t_render2d	*b_void;
+	t_list		*render2d_cmp;
+}	t_main_render;
 
 int			double_buffering(t_render2d **front, t_render2d **back,
 				t_render2d *voidbuffer);

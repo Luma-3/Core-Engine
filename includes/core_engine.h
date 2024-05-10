@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core_engine.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:31:24 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/09 15:29:05 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/05/10 12:30:51 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <X11/keysym.h>
 
 # include "logging.h"
-# include "coord.h"
+# include "logic.h"
 # include "render.h"
 # include "object.h"
 # include "key_bind.h"

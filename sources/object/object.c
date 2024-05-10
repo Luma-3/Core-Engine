@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:18:18 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/09 12:42:17 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/05/10 12:30:40 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_object2d	*new_obj2d(char *name, unsigned int id)
 		return (NULL);
 	}
 	ft_bzero(object, sizeof(t_object2d));
-	object->coord = new_coord(0, 0);
+	object->coord = vector3(0, 0);
 	object->name = strdup(name);
 	if (!object->name)
 	{
