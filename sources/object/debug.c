@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   component.h                                        :+:      :+:    :+:   */
+/*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/10 15:18:55 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/10 16:45:05 by jbrousse         ###   ########.fr       */
+/*   Created: 2024/05/10 16:17:08 by jbrousse          #+#    #+#             */
+/*   Updated: 2024/05/10 16:50:40 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COMPONENT_H
-# define COMPONENT_H
+#include "object.h"
 
-# include "vectorft.h"
-
-typedef struct s_transform
+t_debug	*new_debug(t_vector2 start, t_vector2 end)
 {
-	t_vector2	pos;
-	t_vector2	rot;
-	t_vector2	scale;
-}				t_transform;
+	t_debug	*debug;
 
-typedef struct s_render2d
-{
-	void		*img;
-	char		*addr;
-	int			bpp;
-	int			l_length;
-	int			endian;
-	t_vector2	size;
-	t_transform	*trans;
-	void		(*draw)(void *obj);
-}			t_render2d;
-
-#endif
+	debug = malloc(sizeof(t_debug));
+	if (!debug)
+		return (NULL);
+	ft_bzero(debug, sizeof(t_debug));
+	debug->start = start;
+	debug->end = end;
+	debug->draw_ray = draw_ray;
+	return (debug);
+}

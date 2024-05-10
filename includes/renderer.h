@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:04:30 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/10 15:53:03 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/10 16:50:22 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 # include "component.h"
 # include "object.h"
 
-# define MAX_2D_OBJ 1000
+# define MAX_2D_OBJ		1000
+# define MAX_DEBUG_OBJ	1000
 
 typedef struct s_buffer
 {
@@ -39,7 +40,8 @@ typedef struct s_main_render
 	t_buffer	*b_back;
 	t_buffer	*b_void;
 	t_render2d	obj2d[MAX_2D_OBJ];
-}	t_mrender;
+	t_debug		debug[MAX_DEBUG_OBJ];
+}				t_mrender;
 
 t_mrender	*get_renderer(void);
 
@@ -65,7 +67,5 @@ int			renderer(void);
 void		put_frame(t_buffer *frame);
 
 void		swap_buffers(t_buffer **front, t_buffer **back);
-
-// void		draw_line(int x1, int y1, int x2, int y2, t_render2d *buffer);
 
 #endif
