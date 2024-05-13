@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:13:34 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/10 18:27:37 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/13 14:13:46 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	init_xmp_render2d(t_game_object *obj, const char *file)
 	render.trans = &obj->trans;
 	render.draw = NULL;
 	obj->render = render;
-	renderer->obj2d[obj->id] = &obj->render;
+	renderer->render2d[obj->id] = &obj->render;
 	return (SUCCESS);
 }
 
@@ -67,7 +67,7 @@ int	init_render2d(t_game_object *obj, size_t width, size_t height)
 	render.size = vector2(width, height);
 	render.trans = &obj->trans;
 	obj->render = render;
-	renderer->obj2d[obj->id] = &obj->render;
+	renderer->render2d[obj->id] = &obj->render;
 	obj->render.draw = NULL;
 	return (SUCCESS);
 }

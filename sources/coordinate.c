@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:30:06 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/10 13:05:20 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/13 14:31:24 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,14 @@ t_vector3	world_to_screen(t_vector3 world)
 	screen.x = screen.x + (engine->width / 2);
 	screen.y = (engine->height / 2) - screen.y;
 	return (screen);
+}
+
+t_vector2	world_to_screen2d(t_vector2 world)
+{
+	t_vector3	screen;
+	t_vector3	world3d;
+
+	world3d = vector3(world.x, world.y, 0);
+	screen = world_to_screen(world3d);
+	return (vector2(screen.x, screen.y));
 }

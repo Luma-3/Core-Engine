@@ -6,17 +6,20 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:18:18 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/10 18:35:50 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/13 14:15:00 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "object.h"
+#include "core.h"
 #include "renderer.h"
 
 t_game_object	*new_object(unsigned int id)
 {
 	t_game_object	*object;
+	t_engine		*engine;
 
+	engine = get_engine();
 	object = (t_game_object *)malloc(sizeof(t_game_object));
 	if (!object)
 	{
@@ -26,5 +29,7 @@ t_game_object	*new_object(unsigned int id)
 	ft_bzero(object, sizeof(t_game_object));
 	object->trans.scale = vector2(1, 1);
 	object->id = id;
+	engine->obj2d[id] = object;
+	engine->obj2d_count++;
 	return (object);
 }

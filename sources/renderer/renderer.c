@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:29:25 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/10 18:56:14 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/13 14:13:46 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	renderer(void)
 	renderer = get_renderer();
 	ft_memcpy(renderer->b_back->addr, renderer->b_void->addr,
 		get_engine()->width * get_engine()->height * 4);
-	iter_2d(renderer->obj2d);
+	iter_2d(renderer->render2d);
 	iter_debug(renderer->debug);
 	swap_buffers(&renderer->b_front, &renderer->b_back);
 	put_frame(renderer->b_front);

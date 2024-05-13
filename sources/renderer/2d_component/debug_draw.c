@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 11:10:05 by antgabri          #+#    #+#             */
-/*   Updated: 2024/05/10 16:48:10 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/13 14:33:06 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ static void	__draw_line(t_vector2 start, t_vector2 end, t_buffer *buffer,
 	i = 0;
 	while (i <= steps)
 	{
-		pixel_put(buffer, (t_vector2){coord.x, coord.y}, color);
+		if (coord.x >= 0 && coord.x < buffer->size.x && coord.y >= 0
+			&& coord.y < buffer->size.y)
+			pixel_put(buffer, (t_vector2){coord.x, coord.y}, color);
 		coord.x += increment.x;
 		coord.y += increment.y;
 		i++;
@@ -47,5 +49,5 @@ void	draw_ray(void *obj)
 
 	render = get_renderer();
 	debug = (t_debug *)obj;
-	__draw_line(debug->start, debug->end, render->b_front, debug->color);
+	__draw_line(debug->start, debug->end, render->b_back, debug->color);
 }

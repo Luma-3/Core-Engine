@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:31:24 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/10 16:55:53 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/05/13 14:14:10 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,17 @@
 
 typedef struct s_engine
 {
-	void		*mlx;
-	void		*win;
-	int			width;
-	int			height;
-	char		*title;
-	t_keys		keys;
-	t_camera	*camera;
-	t_mrender	*renderer;
-	int			(*loop_f)(void *);
+	void			*mlx;
+	void			*win;
+	int				width;
+	int				height;
+	char			*title;
+	t_keys			keys;
+	t_camera		*camera;
+	t_mrender		*renderer;
+	int				(*loop_f)(void *);
+	t_game_object	*obj2d[OBJ_2D_MAX];
+	int				obj2d_count;
 }			t_engine;
 
 t_engine	*get_engine(void);
