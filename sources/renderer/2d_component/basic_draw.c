@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:19:15 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/10 18:59:19 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/13 13:36:39 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	basic_draw2d(void *self)
 	renderer = get_renderer();
 	coord = world_to_screen(vector3(this->trans->pos.x, this->trans->pos.y, 0));
 	src.y = 0;
-	// printf("this->trans->pos.x = %f\n", this->trans->pos.x);
 	while (src.y < this->size.y)
 	{
 		src.x = 0;
@@ -50,8 +49,7 @@ void	basic_draw2d(void *self)
 			if (dst.x >= 0 && dst.y >= 0 && dst.x < renderer->b_front->size.x
 				&& dst.y < renderer->b_front->size.y)
 			{
-				// printf("dst.x = %f | dst.y = %f", dst.x, dst.y);
-				copy_pixel(renderer->b_front, this, dst, src);
+				copy_pixel(renderer->b_back, this, dst, src);
 			}
 			src.x++;
 		}

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:00:19 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/10 18:56:38 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/13 13:36:25 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,7 @@ void	copy_pixel(t_buffer *dst, t_render2d *src,
 
 	offset = (roundf(src_c.y) * src->l_length
 			+ roundf(src_c.x) * (src->bpp / 8));
-	// printf ("src ptr = %p\n", src);
-	// printf ("src[offset] = %d\n", src->addr[offset]);
 	color = create_trgb(src->addr[offset + 3], src->addr[offset + 2],
 			src->addr[offset + 1], src->addr[offset]);
-	printf ("color: %d\n", color);
 	pixel_put(dst, dst_c, color);
 }
