@@ -16,6 +16,8 @@
 		"core.h": "c",
 		"logic.h": "c",
 		"renderer.h": "c",
-		"stdlib.h": "c"
+		"stdlib.h": "c",
+		"input.h": "c",
+		"component.h": "c"
 	}
 }

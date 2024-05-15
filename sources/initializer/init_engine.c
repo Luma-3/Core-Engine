@@ -6,33 +6,11 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:43:18 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/10 15:23:15 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/15 10:42:29 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
-
-int	__launch_mlx(t_engine *engine)
-{
-	engine->mlx = mlx_init();
-	logdebug(__FILE__, __LINE__, "mlx_init() called");
-	if (!engine->mlx)
-	{
-		stop_engine();
-		logerror(__FILE__, __LINE__, "mlx_init() failed");
-		return (FAILURE);
-	}
-	engine->win = mlx_new_window(engine->mlx, engine->width, engine->height,
-			engine->title);
-	logdebug(__FILE__, __LINE__, "mlx_new_window() called");
-	if (!engine->win)
-	{
-		stop_engine();
-		logerror(__FILE__, __LINE__, "mlx_new_window() failed");
-		return (FAILURE);
-	}
-	return (SUCCESS);
-}
 
 int	init_engine(void)
 {
@@ -41,20 +19,12 @@ int	init_engine(void)
 	init_logger();
 	engine = get_engine();
 	ft_bzero(engine, sizeof(t_engine));
-	if (read_config(engine) == FAILURE)
+	engine->mlx = mlx_init();
+	logdebug(__FILE__, __LINE__, "mlx_init() called");
+	if (!engine->mlx)
 	{
-		logerror(__FILE__, __LINE__, "read_config() failed");
-		return (FAILURE);
-	}
-	ft_bzero(&(engine->camera), sizeof(t_camera));
-	if (__launch_mlx(engine) == FAILURE)
-	{
-		logerror(__FILE__, __LINE__, "__launch_mlx() failed");
-		return (FAILURE);
-	}
-	if (__init_renderer(engine) == FAILURE)
-	{
-		logerror(__FILE__, __LINE__, "__init_renderer() failed");
+		stop_engine();
+		logerror(__FILE__, __LINE__, "mlx_init() failed");
 		return (FAILURE);
 	}
 	return (SUCCESS);

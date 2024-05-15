@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:13:34 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/13 14:13:46 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/15 11:38:34 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ static int	__get_addr(t_render2d *render)
 	return (SUCCESS);
 }
 
-int	init_xmp_render2d(t_game_object *obj, const char *file)
+int	init_xmp_render2d(t_game_object *obj, const char *file, int id_win)
 {
-	t_mrender	*renderer;
+	t_engine	*engine;
 	t_render2d	render;
 	int			width;
 	int			height;
 
-	renderer = get_renderer();
+	engine = get_engine();
 	render.img = mlx_xpm_file_to_image(get_engine()->mlx, (char *)file,
 			&width, &height);
 	if (!render.img)
@@ -42,20 +42,20 @@ int	init_xmp_render2d(t_game_object *obj, const char *file)
 	}
 	if (__get_addr(&render) == FAILURE)
 		return (FAILURE);
+	render.id_win = id_win;
 	render.size = vector2(width, height);
 	render.trans = &obj->trans;
 	render.draw = NULL;
 	obj->render = render;
-	renderer->render2d[obj->id] = &obj->render;
 	return (SUCCESS);
 }
 
-int	init_render2d(t_game_object *obj, size_t width, size_t height)
+int	init_render2d(t_game_object *obj, size_t width, size_t height, int id_win)
 {
 	t_render2d	render;
-	t_mrender	*renderer;
+	t_engine	*engine;
 
-	renderer = get_renderer();
+	engine = get_engine();
 	render.img = mlx_new_image(get_engine()->mlx, width, height);
 	if (!render.img)
 	{
@@ -66,8 +66,8 @@ int	init_render2d(t_game_object *obj, size_t width, size_t height)
 		return (FAILURE);
 	render.size = vector2(width, height);
 	render.trans = &obj->trans;
+	render.id_win = id_win;
 	obj->render = render;
-	renderer->render2d[obj->id] = &obj->render;
 	obj->render.draw = NULL;
 	return (SUCCESS);
 }

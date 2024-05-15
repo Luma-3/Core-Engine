@@ -6,46 +6,46 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:29:25 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/13 14:13:46 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/15 11:31:13 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 #include "renderer.h"
 
-static bool	culling_obj(int x, int y, int width, int height)
+static bool	culling_obj(t_vector2 coord, t_vector2 size, int id_win)
 {
 	t_engine	*engine;
 
 	engine = get_engine();
-	if (x - (width / 2) > engine->width || x + (width / 2) < 0)
+	if (coord.x - (size.x / 2) > engine->win[id_win].width || coord.x + (size.x / 2) < 0)
 	{
 		return (true);
 	}
-	if (y - (height / 2) > engine->height || y + (height / 2) < 0)
+	if (coord.y - (size.y / 2) > engine->win[id_win].height || coord.y + (size.y / 2) < 0)
 	{
 		return (true);
 	}
 	return (false);
 }
 
-static void	iter_2d(t_render2d **render)
+static void	iter_2d(t_game_object **objs)
 {
 	int			i;
-	t_vector3	coord;
+	t_vector2	coord;
 
 	i = 0;
 	while (i < MAX_2D_OBJ)
 	{
-		if (render[i] != NULL)
+		if (objs[i] != NULL)
 		{
-			if (render[i]->draw != NULL)
+			if (objs[i]->render.draw != NULL)
 			{
-				coord = world_to_screen(vector3(render[i]->trans->pos.x, render[i]->trans->pos.y, 0));
-				if (culling_obj(coord.x, coord.y,
-					render[i]->size.x, render[i]->size.y) == false)
+				coord = world_to_screen(objs[i]->trans.pos,
+						objs[i]->render.id_win);
+				if (culling_obj(coord, objs[i]->render.size, objs[i]->render.id_win) == false)
 				{
-					render[i]->draw(render[i]);
+					objs[i]->render.draw(&(objs[i]->render));
 				}
 			}
 		}
@@ -68,14 +68,24 @@ static void	iter_debug(t_debug **debug)
 
 int	renderer(void)
 {
-	t_mrender	*renderer;
+	t_engine	*engine;
+	int 		i;
 
-	renderer = get_renderer();
-	ft_memcpy(renderer->b_back->addr, renderer->b_void->addr,
-		get_engine()->width * get_engine()->height * 4);
-	iter_2d(renderer->render2d);
-	iter_debug(renderer->debug);
-	swap_buffers(&renderer->b_front, &renderer->b_back);
-	put_frame(renderer->b_front);
+	i = 0;
+	engine = get_engine();
+	while (i < engine->nb_win)
+	{
+		ft_memcpy(engine->win[i].renderer->b_back->addr, engine->win[i].renderer->b_void->addr,
+			engine->win[i].width * engine->win[i].height * 4);
+	}
+	iter_2d(engine->obj2d);
+	iter_debug(engine->debug);
+	i = 0;
+	while (i < engine->nb_win)
+	{
+		swap_buffers(&engine->win[i].renderer->b_front, &engine->win[i].renderer->b_back);
+		put_frame(engine->win[i].renderer->b_front);
+		i++;
+	}
 	return (SUCCESS);
 }

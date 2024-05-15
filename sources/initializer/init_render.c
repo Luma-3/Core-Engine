@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 14:49:50 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/10 19:04:55 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/15 10:49:24 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,25 +67,21 @@ static int	__init_d_buffer(t_mrender *render, size_t width, size_t height)
 	return (SUCCESS);
 }
 
-int	__init_renderer(t_engine *engine)
+int	__init_renderer(void *mlx_ptr, t_win *win, t_vector2 win_size)
 {
-	t_mrender	*renderer;
-
-	renderer = get_renderer();
-	loginfo(__FILE__, __LINE__, "init_renderer");
-	renderer->b_void = malloc(sizeof(t_buffer));
+	win->renderer->b_void = malloc(sizeof(t_buffer));
 	loginfo(__FILE__, __LINE__, "init_buffer renderer->voidbuffer");
-	if (!renderer->b_void)
+	if (!win->renderer->b_void)
 	{
 		logwarning(__FILE__, __LINE__, "init_buffer failed (voidbuffer)");
-		renderer = NULL;
+		win->renderer = NULL;
 		return (FAILURE);
 	}
-	renderer->b_void = init_buffer(engine->width, engine->height);
-	__draw_void(renderer->b_void, engine->width, engine->height);
-	mlx_put_image_to_window(engine->mlx, engine->win,
-		renderer->b_void->img, 0, 0);
-	if (__init_d_buffer(renderer, engine->width, engine->height) == FAILURE)
+	win->renderer->b_void = init_buffer(win_size.x, win_size.y);
+	__draw_void(win->renderer->b_void, win_size.x, win_size.y);
+	mlx_put_image_to_window(mlx_ptr, win->win_ptr,
+		win->renderer->b_void->img, 0, 0);
+	if (__init_d_buffer(win->renderer, win_size.x, win_size.y) == FAILURE)
 		return (FAILURE);
 	return (SUCCESS);
 }

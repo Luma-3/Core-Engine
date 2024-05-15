@@ -6,19 +6,20 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 16:17:08 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/10 17:03:49 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/15 11:35:06 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "object.h"
 #include "renderer.h"
+#include "core.h"
 
 t_debug	*new_debug(t_vector2 start, t_vector2 end, int id)
 {
 	t_debug		*debug;
-	t_mrender	*renderer;
+	t_engine	*engine;
 
-	renderer = get_renderer();
+	engine = get_engine();
 	debug = malloc(sizeof(t_debug));
 	if (!debug)
 		return (NULL);
@@ -26,6 +27,6 @@ t_debug	*new_debug(t_vector2 start, t_vector2 end, int id)
 	debug->start = start;
 	debug->end = end;
 	debug->draw_ray = draw_ray;
-	renderer->debug[id] = debug;
+	engine->debug[id] = debug;
 	return (debug);
 }

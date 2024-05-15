@@ -6,11 +6,12 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 11:10:05 by antgabri          #+#    #+#             */
-/*   Updated: 2024/05/13 14:33:06 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/15 11:33:39 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "renderer.h"
+#include "core.h"
 
 static void	__draw_line(t_vector2 start, t_vector2 end, t_buffer *buffer,
 	int color)
@@ -44,10 +45,10 @@ static void	__draw_line(t_vector2 start, t_vector2 end, t_buffer *buffer,
 
 void	draw_ray(void *obj)
 {
-	t_mrender	*render;
+	t_engine	*engine;
 	t_debug		*debug;
 
-	render = get_renderer();
+	engine = get_engine();
 	debug = (t_debug *)obj;
-	__draw_line(debug->start, debug->end, render->b_back, debug->color);
+	__draw_line(debug->start, debug->end, engine->win[debug->id_win].renderer->b_back, debug->color);
 }

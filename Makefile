@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/27 21:44:08 by jbrousse          #+#    #+#              #
-#    Updated: 2024/05/10 16:47:37 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/05/15 11:40:36 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,8 +46,7 @@ SRC_CLOSING			=	$(addprefix $(SRC_CLOSING_DIR), $(SRC_CLOSING_LIST))
 SRC_INIT_DIR		=	initializer/
 SRC_INIT_LIST		=	init_engine.c	\
 						init_render.c	\
-						parse_config.c	\
-						read_config.c
+						init_window.c
 SRC_INIT			=	$(addprefix $(SRC_INIT_DIR), $(SRC_INIT_LIST))
 
 SRC_IO_DIR			=	io/
@@ -62,7 +61,6 @@ SRC_LOG				=	$(addprefix $(SRC_LOGGING), $(SRC_LOG_LIST))
 
 SRC_OBJ_DIR			=	object/
 SRC_OBJ_LIST		=	object.c \
-						camera.c	\
 						debug.c	
 SRC_OBJ				=	$(addprefix $(SRC_OBJ_DIR), $(SRC_OBJ_LIST))
 

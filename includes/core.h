@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:31:24 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/13 14:14:10 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/15 11:26:50 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,30 +27,37 @@
 # include "object.h"
 # include "input.h"
 
-# define FAILURE -1
-# define SUCCESS 0
+# define FAILURE	-1
+# define SUCCESS	0
 
-# define CONFIG_FILE "./config.cfg"
+# define VOID_COLOR	0x0000FF
 
-# define VOID_COLOR 0x0000FF
+# define OBJ_2D_MAX	1000
 
-# define OBJ_2D_MAX 1000
+# define PI 		3.14159265359
 
-# define PI 3.14159265359
+# define MAX_WIN	10
+
+typedef struct s_win
+{
+	void			*win_ptr;
+	char			*title;
+	unsigned int	width;
+	unsigned int	height;
+	t_mrender		*renderer;
+	t_vector2		offset;
+}					t_win;
 
 typedef struct s_engine
 {
 	void			*mlx;
-	void			*win;
-	int				width;
-	int				height;
-	char			*title;
-	t_keys			keys;
-	t_camera		*camera;
-	t_mrender		*renderer;
+	t_win			win[MAX_WIN];
+	int				nb_win;
 	int				(*loop_f)(void *);
 	t_game_object	*obj2d[OBJ_2D_MAX];
 	int				obj2d_count;
+	t_debug			*debug[MAX_DEBUG_OBJ];
+	int				debug_count;
 }			t_engine;
 
 t_engine	*get_engine(void);
@@ -59,13 +66,9 @@ int			init_engine(void);
 
 void		loop(int (*f)(void *), void *param);
 
-int			parse_config(t_engine *engine, t_list *config);
-
-int			read_config(t_engine *engine);
-
 int			stop_engine(void);
 
-int			__init_renderer(t_engine *engine);
+int			__init_renderer(void *mlx_ptr, t_win *win, t_vector2 win_size);
 
 //////////////////////////
 //		IO/envent.c		//

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 11:17:11 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/10 15:54:24 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/15 10:55:02 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 
 int	__close_mlx(t_engine *engine)
 {
-	if (engine->win && engine->mlx)
-	{
-		mlx_destroy_window(engine->mlx, engine->win);
-		logdebug(__FILE__, __LINE__, "mlx_destroy_window() called");
-	}
 	if (engine->mlx)
 	{
 		mlx_destroy_display(engine->mlx);
@@ -34,11 +29,6 @@ int	__close_mlx(t_engine *engine)
 
 int	__clear_engine(t_engine *engine)
 {
-	if (engine->title)
-	{
-		free(engine->title);
-		logdebug(__FILE__, __LINE__, "Freeing engine->title");
-	}
 	engine = NULL;
 	logdebug(__FILE__, __LINE__, "Freeing engine");
 	return (SUCCESS);

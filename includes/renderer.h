@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:04:30 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/13 14:13:59 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/15 11:39:19 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ typedef struct s_main_render
 	t_buffer	*b_front;
 	t_buffer	*b_back;
 	t_buffer	*b_void;
-	t_render2d	*render2d[MAX_2D_OBJ];
-	t_debug		*debug[MAX_DEBUG_OBJ];
 }				t_mrender;
 
 t_mrender	*get_renderer(void);
@@ -52,7 +50,7 @@ void		copy_pixel(t_buffer *dst, t_render2d *src,
 
 int			create_trgb(int t, int r, int g, int b);
 
-int			init_render2d(t_game_object *obj, size_t width, size_t height);
+int			init_render2d(t_game_object *obj, size_t width, size_t height, int id_win);
 
 /**
  * @brief Initialize an image from a xpm file
@@ -60,7 +58,7 @@ int			init_render2d(t_game_object *obj, size_t width, size_t height);
  * @param file The path to the xpm file
  * @return t_img* The image structure or NULL if an CRITICAL error occured
 */
-int			init_xmp_render2d(t_game_object *obj, const char *file);
+int			init_xmp_render2d(t_game_object *obj, const char *file, int id_win);
 
 int			renderer(void);
 
