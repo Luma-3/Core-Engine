@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   basic_draw.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:19:15 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/15 11:12:59 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/15 13:27:31 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ void	basic_draw2d(void *self)
 		{
 			offset.x = (src.x - (this->size.x / 2)) * this->trans->scale.x;
 			dst = cal_dst(angle, offset, vector2(coord.x, coord.y));
-			if (dst.x >= 0 && dst.y >= 0 && dst.x < engine->win[this->id_win].renderer->b_front->size.x
-				&& dst.y < engine->win[this->id_win].renderer->b_front->size.y)
+			if (dst.x >= 0 && dst.y >= 0 && dst.x < engine->win[this->id_win]->renderer.b_front->size.x
+				&& dst.y < engine->win[this->id_win]->renderer.b_front->size.y)
 			{
-				copy_pixel(engine->win[this->id_win].renderer->b_back, this, dst, src);
+				copy_pixel(engine->win[this->id_win]->renderer.b_back, this, dst, src);
 			}
 			src.x++;
 		}

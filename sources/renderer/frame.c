@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frame.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:16:29 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/13 13:36:55 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/15 15:19:19 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@ void	swap_buffers(t_buffer **front, t_buffer **back)
 	*back = tmp;
 }
 
-void	put_frame(t_buffer *frame)
+void	put_frame(t_buffer *frame, void *win)
 {
 	t_engine	*engine;
+	t_win		*window;
 
+	window = (t_win *)win;
 	engine = get_engine();
-	mlx_put_image_to_window(engine->mlx, engine->win, frame->img, 0, 0);
+	mlx_put_image_to_window(engine->mlx, window->win_ptr, frame->img, 0, 0);
 }

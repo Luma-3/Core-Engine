@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_render.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 14:49:50 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/15 10:49:24 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/15 13:27:05 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,19 +69,11 @@ static int	__init_d_buffer(t_mrender *render, size_t width, size_t height)
 
 int	__init_renderer(void *mlx_ptr, t_win *win, t_vector2 win_size)
 {
-	win->renderer->b_void = malloc(sizeof(t_buffer));
-	loginfo(__FILE__, __LINE__, "init_buffer renderer->voidbuffer");
-	if (!win->renderer->b_void)
-	{
-		logwarning(__FILE__, __LINE__, "init_buffer failed (voidbuffer)");
-		win->renderer = NULL;
-		return (FAILURE);
-	}
-	win->renderer->b_void = init_buffer(win_size.x, win_size.y);
-	__draw_void(win->renderer->b_void, win_size.x, win_size.y);
+	win->renderer.b_void = init_buffer(win_size.x, win_size.y);
+	__draw_void(win->renderer.b_void, win_size.x, win_size.y);
 	mlx_put_image_to_window(mlx_ptr, win->win_ptr,
-		win->renderer->b_void->img, 0, 0);
-	if (__init_d_buffer(win->renderer, win_size.x, win_size.y) == FAILURE)
+		win->renderer.b_void->img, 0, 0);
+	if (__init_d_buffer(&(win->renderer), win_size.x, win_size.y) == FAILURE)
 		return (FAILURE);
 	return (SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:31:24 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/15 11:26:50 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/15 15:21:20 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ typedef struct s_win
 	char			*title;
 	unsigned int	width;
 	unsigned int	height;
-	t_mrender		*renderer;
+	t_mrender		renderer;
 	t_vector2		offset;
 }					t_win;
 
 typedef struct s_engine
 {
 	void			*mlx;
-	t_win			win[MAX_WIN];
+	t_win			*win[MAX_WIN];
 	int				nb_win;
 	int				(*loop_f)(void *);
 	t_game_object	*obj2d[OBJ_2D_MAX];
@@ -63,6 +63,8 @@ typedef struct s_engine
 t_engine	*get_engine(void);
 
 int			init_engine(void);
+
+int			init_window(t_vector2 size, char *title);
 
 void		loop(int (*f)(void *), void *param);
 
@@ -82,6 +84,6 @@ int			loop_hook(int (*f)(), void *param);
 
 int			expose_hook(int (*f)(), void *param);
 
-int			event_hook(int (*f)(), int envent, int mask, void *param);
+int			event_hook(int (*f)(), int envent, int mask, void *param, int id_win);
 
 #endif
