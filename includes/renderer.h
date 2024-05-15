@@ -6,7 +6,7 @@
 /*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:04:30 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/15 15:18:08 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/05/15 16:52:31 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int			init_render2d(t_game_object *obj, size_t width, size_t height, int id_win)
 */
 int			init_xmp_render2d(t_game_object *obj, const char *file, int id_win);
 
-int			renderer(void);
+int			renderer(void *param);
 
 void		put_frame(t_buffer *frame, void *win);
 
@@ -68,4 +68,5 @@ void		swap_buffers(t_buffer **front, t_buffer **back);
 
 void		basic_draw2d(void *self);
 
+int			update_game(void *obj);
 #endif

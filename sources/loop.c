@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 23:13:02 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/10 15:22:06 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/15 16:52:04 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@ int	loop_function(void *param)
 	t_engine	*engine;
 
 	engine = get_engine();
-	if (engine->loop_f)
-		engine->loop_f(param);
-	renderer();
+
+	renderer(param);
 	return (0);
 }
 

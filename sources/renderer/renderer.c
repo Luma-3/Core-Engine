@@ -6,7 +6,7 @@
 /*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:29:25 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/15 15:18:48 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/05/15 16:55:57 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static void	iter_2d(t_game_object **objs)
 	i = 0;
 	while (i < MAX_2D_OBJ)
 	{
-		printf("objs[%d] = %p\n", i, objs[i]);
 		if (objs[i] != NULL && objs[i]->render.img != NULL)
 		{
 			if (objs[i]->render.draw != NULL)
@@ -67,26 +66,22 @@ static void	iter_debug(t_debug **debug)
 	}
 }
 
-int	renderer(void)
+int	renderer(void *param)
 {
 	t_engine	*engine;
 	int 		i;
 
 	i = 0;
 	engine = get_engine();
-	for (int i = 0; i < 400; i++)
-	{
-		printf("engine->obj2d[%d] = %p\n", i, engine->obj2d[i]);
-	}
 	while (i < engine->nb_win)
 	{
-		printf("coucou\n");
 		ft_memcpy(engine->win[i]->renderer.b_back->addr, engine->win[i]->renderer.b_void->addr,
 			engine->win[i]->width * engine->win[i]->height * 4);
 		i++;
 	}
 	iter_2d(engine->obj2d);
-	
+	if (engine->loop_f)
+		engine->loop_f(param);
 	iter_debug(engine->debug);
 	i = 0;
 	while (i < engine->nb_win)
