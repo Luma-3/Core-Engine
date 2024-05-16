@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 18:01:48 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/10 12:52:04 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/16 12:55:15 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # define KEY_S 0x0073
 # define KEY_D 0x0064
 
+# define KEY_SHIFT 0xffe1
+
 typedef struct s_keys
 {
 	int		up;
@@ -31,6 +33,7 @@ typedef struct s_keys
 	int		right;
 	int		rotate_left;
 	int		rotate_right;
+	int		shift;
 }			t_keys;
 
 int	key_release(int keycode, t_keys *keys);
