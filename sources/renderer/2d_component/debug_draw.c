@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug_draw.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 11:10:05 by antgabri          #+#    #+#             */
-/*   Updated: 2024/05/15 13:27:48 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/05/17 09:12:54 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ void	draw_ray(void *obj)
 
 	engine = get_engine();
 	debug = (t_debug *)obj;
-	__draw_line(debug->start, debug->end, engine->win[debug->id_win]->renderer.b_back, debug->color);
+	__draw_line(debug->start, debug->end,
+		engine->win[debug->id_win]->renderer.b_back, debug->color);
 }

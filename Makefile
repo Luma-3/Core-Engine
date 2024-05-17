@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/27 21:44:08 by jbrousse          #+#    #+#              #
-#    Updated: 2024/05/15 11:40:36 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/05/15 23:21:23 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 ###############
 
 CC		=	cc
-CFLAGS	=	-Wall -Werror -Wextra -g3
+CFLAGS	=	-Wall -Wextra -g3
 
 ################
 ##   LIBS	  ##

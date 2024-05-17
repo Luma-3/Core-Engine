@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:00:19 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/15 15:47:19 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/05/17 09:21:00 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,21 @@ void	pixel_put(t_buffer *img, t_vector2 coord, int color)
 	*(unsigned int *)(img->addr + offset) = color;
 }
 
-void	copy_pixel(t_buffer *dst, t_render2d *src,
-	t_vector2 dst_c, t_vector2 src_c)
+void	copy_pixel(t_win *win, t_texture *texture,
+	t_vector2 coord_dst, t_vector2 coord_src)
 {
 	int	color;
 	int	offset;
 
-	offset = (roundf(src_c.y) * src->l_length
-			+ roundf(src_c.x) * (src->bpp / 8));
-	color = create_trgb(src->addr[offset + 3], src->addr[offset + 2],
-			src->addr[offset + 1], src->addr[offset]);
-	pixel_put(dst, dst_c, color);
+	if (!(coord_dst.x >= 0 && coord_dst.y >= 0
+			&& coord_dst.x < win->width
+			&& coord_dst.y < win->height))
+	{
+		return ;
+	}
+	offset = (roundf(coord_src.y) * texture->l_length
+			+ roundf(coord_src.x) * (texture->bpp / 8));
+	color = create_trgb(texture->addr[offset + 3], texture->addr[offset + 2],
+			texture->addr[offset + 1], texture->addr[offset]);
+	pixel_put(win->renderer.b_back, coord_dst, color);
 }
