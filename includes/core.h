@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:31:24 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/15 15:21:20 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/05/18 15:45:00 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,49 +22,24 @@
 # include <X11/keysym.h>
 
 # include "logging.h"
-# include "logic.h"
 # include "renderer.h"
+# include "logic.h"
 # include "object.h"
 # include "input.h"
+# include "data.h"
 
 # define FAILURE	-1
 # define SUCCESS	0
 
 # define VOID_COLOR	0x0000FF
 
-# define OBJ_2D_MAX	1000
-
 # define PI 		3.14159265359
-
-# define MAX_WIN	10
-
-typedef struct s_win
-{
-	void			*win_ptr;
-	char			*title;
-	unsigned int	width;
-	unsigned int	height;
-	t_mrender		renderer;
-	t_vector2		offset;
-}					t_win;
-
-typedef struct s_engine
-{
-	void			*mlx;
-	t_win			*win[MAX_WIN];
-	int				nb_win;
-	int				(*loop_f)(void *);
-	t_game_object	*obj2d[OBJ_2D_MAX];
-	int				obj2d_count;
-	t_debug			*debug[MAX_DEBUG_OBJ];
-	int				debug_count;
-}			t_engine;
 
 t_engine	*get_engine(void);
 
 int			init_engine(void);
 
-int			init_window(t_vector2 size, char *title);
+int			init_window(t_vector2 win_size, const char *title);
 
 void		loop(int (*f)(void *), void *param);
 

@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/27 21:44:08 by jbrousse          #+#    #+#              #
-#    Updated: 2024/05/15 23:21:23 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/05/17 18:40:03 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,7 @@ SRC_OBJ				=	$(addprefix $(SRC_OBJ_DIR), $(SRC_OBJ_LIST))
 SRC_RENDERER_DIR	=	renderer/
 
 SRC_2D_DIR			=	2d_component/
-SRC_2D_LIST			=	init_render2d.c	\
+SRC_2D_LIST			=	init_texture.c	\
 						basic_draw.c	\
 						debug_draw.c
 SRC_2D				=	$(addprefix $(SRC_2D_DIR), $(SRC_2D_LIST))

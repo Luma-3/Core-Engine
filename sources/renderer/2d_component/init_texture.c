@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:13:34 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/17 09:10:39 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/18 12:45:53 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	__get_addr(t_texture *texture)
 	return (SUCCESS);
 }
 
-t_texture	*init_texture_xpm(const char *file_name)
+t_texture	*init_texture(const char *file_name)
 {
 	t_engine	*engine;
 	t_texture	*texture;
@@ -40,7 +40,7 @@ t_texture	*init_texture_xpm(const char *file_name)
 		return (NULL);
 	}
 	texture->img = mlx_xpm_file_to_image(engine->mlx,
-			file_name, &width, &height);
+			(char *)file_name, &width, &height);
 	if (texture->img == NULL)
 	{
 		logerror(__FILE__, __LINE__, "mlx_xpm_file_to_image() failed");
@@ -51,5 +51,16 @@ t_texture	*init_texture_xpm(const char *file_name)
 	{
 		return (free(texture->img), free(texture), NULL);
 	}
-	return (SUCCESS);
+	return (texture);
+}
+
+void	destroy_texture(t_texture *texture)
+{
+	if (texture == NULL)
+	{
+		logwarning(__FILE__, __LINE__, "the texture is NULL");
+		return ;
+	}
+	mlx_destroy_image(get_engine()->mlx, texture->img);
+	free(texture);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   renderer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:29:25 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/15 16:55:57 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/05/17 18:43:13 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ static void	iter_2d(t_game_object **objs)
 	i = 0;
 	while (i < MAX_2D_OBJ)
 	{
-		if (objs[i] != NULL && objs[i]->render.img != NULL)
+		if (objs[i] != NULL && objs[i]->render.texture != NULL)
 		{
 			if (objs[i]->render.draw != NULL)
 			{
 				coord = world_to_screen(objs[i]->trans.pos,
 						objs[i]->render.id_win);
-				if (culling_obj(coord, objs[i]->render.size, objs[i]->render.id_win) == false)
+				if (culling_obj(coord, objs[i]->render.texture->size, objs[i]->render.id_win) == false)
 				{
 					objs[i]->render.draw(&(objs[i]->render));
 				}

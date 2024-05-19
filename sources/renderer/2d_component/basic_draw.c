@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:19:15 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/17 09:16:20 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/17 19:04:12 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 #include "object.h"
 #include "renderer.h"
 
-static t_vector2	cal_dst(t_vector2 angle, t_vector2 src, t_vector2 coord)
+static t_vector2	cal_dst(t_vector2 angle, t_vector2 offset, t_vector2 coord)
 {
 	t_vector2	dst;
-	t_vector2	offset;
 
 	dst.x = (offset.x * angle.x - offset.y * angle.y) + coord.x;
 	dst.y = (offset.x * angle.y + offset.y * angle.x) + coord.y;
