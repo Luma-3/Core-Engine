@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 18:01:48 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/16 12:55:15 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/21 15:52:52 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # define KEY_D 0x0064
 
 # define KEY_SHIFT 0xffe1
+
+# define KEY_ESC 0xff1b
 
 typedef struct s_keys
 {

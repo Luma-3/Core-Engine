@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   basic_draw.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:19:15 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/15 16:38:35 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/05/17 19:04:12 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,35 +25,29 @@ static t_vector2	cal_dst(t_vector2 angle, t_vector2 offset, t_vector2 coord)
 
 void	basic_draw2d(void *self)
 {
-	t_engine	*engine;
 	t_vector2	dst;
 	t_vector2	src;
 	t_vector2	offset;
 	t_vector2	angle;
 	t_vector2	coord;
+	t_render2d	*this = (t_render2d *)self;
 
-	t_render2d *this = (t_render2d *)self;
-	angle.x = cos(this->trans->rot.x);
-	angle.y = sin(this->trans->rot.x);
-	engine = get_engine();
+	angle = vector2(cos(this->trans->rot.x), sin(this->trans->rot.x));
 	coord = world_to_screen(this->trans->pos, this->id_win);
 	src.y = 0;
-	while (src.y < this->size.y)
+	while (src.y < this->texture->size.y)
 	{
 		src.x = 0;
-		offset.y = (src.y - (this->size.y / 2)) * this->trans->scale.x;
-		while (src.x < this->size.x)
+		offset.y = (src.y - (this->texture->size.y / 2)) * this->trans->scale.x;
+		while (src.x < this->texture->size.x)
 		{
-			offset.x = (src.x - (this->size.x / 2)) * this->trans->scale.x;
+			offset.x = (src.x - (this->texture->size.x / 2))
+				* this->trans->scale.x;
 			dst = cal_dst(angle, offset, vector2(coord.x, coord.y));
-			if (dst.x >= 0 && dst.y >= 0 && dst.x < engine->win[this->id_win]->renderer.b_front->size.x
-				&& dst.y < engine->win[this->id_win]->renderer.b_front->size.y)
-			{
-				copy_pixel(engine->win[this->id_win]->renderer.b_back, this, dst, src);
-			}
+			copy_pixel(get_engine()->win[this->id_win],
+				this->texture, dst, src);
 			src.x++;
 		}
 		src.y++;
 	}
 }
-

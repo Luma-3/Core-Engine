@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 16:58:08 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/15 11:39:32 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/18 12:48:02 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ typedef struct s_debug
 	void		(*draw_ray)(void *obj);
 }				t_debug;
 
-t_game_object	*new_object(unsigned int id);
+t_game_object	*new_object(unsigned int id, t_texture *texture,
+					unsigned int win_id);
+
+void			destroy_object(t_game_object *object, int do_destroy_texture);
 
 t_debug			*new_debug(t_vector2 start, t_vector2 end, int id);
 
