@@ -6,7 +6,7 @@
 /*   By: monsieurc <monsieurc@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:00:19 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/25 12:20:14 by monsieurc        ###   ########.fr       */
+/*   Updated: 2024/05/25 14:20:44 by monsieurc        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	pixel_put(t_buffer *img, t_vector2 coord, int color)
 			+ roundf(coord.x) * (img->bpp / 8));
 	*(unsigned int *)(img->addr + offset) = color;
 }
-static int	apply_shade(int color, float shade)
+
+int	apply_shade(int color, float shade)
 {
 	int		r;
 	int		g;
