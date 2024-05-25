@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: monsieurc <monsieurc@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:00:19 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/21 17:04:13 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/05/25 12:20:14 by monsieurc        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,26 @@ void	pixel_put(t_buffer *img, t_vector2 coord, int color)
 			+ roundf(coord.x) * (img->bpp / 8));
 	*(unsigned int *)(img->addr + offset) = color;
 }
+static int	apply_shade(int color, float shade)
+{
+	int		r;
+	int		g;
+	int		b;
+
+	r = (color & 0x00FF0000) >> 16;
+	g = (color & 0x0000FF00) >> 8;
+	b = (color & 0x000000FF);
+	r = r * shade;
+	g = g * shade;
+	b = b * shade;
+	return (create_trgb(0, r, g, b));
+}
 
 void	copy_pixel(t_win *win, t_texture *texture,
-	t_vector2 coord_dst, t_vector2 coord_src)
+	t_vector2 coord_dst, t_vector2 coord_src, float shade)
 {
-	int	color;
-	int	offset;
+	int		color;
+	int		offset;
 
 	if (!(coord_dst.x >= 0 && coord_dst.y >= 0
 			&& coord_dst.x < win->width
@@ -42,7 +56,9 @@ void	copy_pixel(t_win *win, t_texture *texture,
 	}
 	offset = (roundf(coord_src.y) * texture->l_length
 			+ roundf(coord_src.x) * (texture->bpp / 8));
-	color = create_trgb(texture->addr[offset + 3], texture->addr[offset + 2],
+    color = create_trgb(texture->addr[offset + 3], texture->addr[offset + 2],
 			texture->addr[offset + 1], texture->addr[offset]);
+	color = apply_shade(color, shade);
 	pixel_put(win->renderer.b_back, coord_dst, color);
 }
+

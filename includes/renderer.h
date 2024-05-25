@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   renderer.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: monsieurc <monsieurc@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:04:30 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/21 17:01:32 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/05/25 12:07:39 by monsieurc        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 void		pixel_put(t_buffer *img, t_vector2 coord, int color);
 
 void		copy_pixel(t_win *win, t_texture *texture,
-				t_vector2 coord_dst, t_vector2 coord_src);
+				t_vector2 coord_dst, t_vector2 coord_src, float shade);
 
 int			create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned char b);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   basic_draw.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: monsieurc <monsieurc@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:19:15 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/17 19:04:12 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/25 12:12:53 by monsieurc        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	basic_draw2d(void *self)
 			offset.x = (src.x - (this->texture->size.x / 2))
 				* this->trans->scale.x;
 			dst = cal_dst(angle, offset, vector2(coord.x, coord.y));
-			copy_pixel(get_engine()->win[this->id_win],
-				this->texture, dst, src);
+			// copy_pixel(get_engine()->win[this->id_win],
+			// 	this->texture, dst, src);
 			src.x++;
 		}
 		src.y++;
