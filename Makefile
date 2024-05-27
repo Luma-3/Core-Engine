@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/27 21:44:08 by jbrousse          #+#    #+#              #
-#    Updated: 2024/05/17 18:40:03 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/05/27 11:53:49 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,9 @@ VECTORFT_INC= $(VECTORFT_DIR)includes/
 SRC_DIR				=	sources/
 
 SRC_CLOSING_DIR		=	stop_components/
-SRC_CLOSING_LIST	=	stop_engine.c
+SRC_CLOSING_LIST	=	stop_engine.c	\
+						stop_win.c		\
+						stop_renderer.c
 SRC_CLOSING			=	$(addprefix $(SRC_CLOSING_DIR), $(SRC_CLOSING_LIST))
 
 SRC_INIT_DIR		=	initializer/

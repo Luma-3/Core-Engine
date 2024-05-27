@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:31:24 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/18 15:45:00 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/27 11:52:24 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,9 @@ int			loop_hook(int (*f)(), void *param);
 int			expose_hook(int (*f)(), void *param);
 
 int			event_hook(int (*f)(), int envent, int mask, void *param, int id_win);
+
+void		destroy_win(t_win *win);
+
+void	destroy_renderer(t_mrender *renderer);
 
 #endif

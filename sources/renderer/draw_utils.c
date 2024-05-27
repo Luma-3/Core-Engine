@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: monsieurc <monsieurc@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:00:19 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/25 14:20:44 by monsieurc        ###   ########.fr       */
+/*   Updated: 2024/05/27 11:08:03 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	copy_pixel(t_win *win, t_texture *texture,
 	{
 		return ;
 	}
-	offset = (roundf(coord_src.y) * texture->l_length
-			+ roundf(coord_src.x) * (texture->bpp / 8));
+	offset = ((int)(coord_src.y) * texture->l_length
+			+ (int)(coord_src.x) * (texture->bpp / 8));
     color = create_trgb(texture->addr[offset + 3], texture->addr[offset + 2],
 			texture->addr[offset + 1], texture->addr[offset]);
 	color = apply_shade(color, shade);

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 11:17:11 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/17 18:39:37 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/27 11:43:30 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,14 @@ int	stop_engine(void)
 	t_engine	*engine;
 
 	engine = get_engine();
+	while (engine->nb_win > 0)
+	{
+		engine->nb_win--;
+		if (engine->win[engine->nb_win])
+		{
+			destroy_win(engine->win[engine->nb_win]);
+		}
+	}
 	__close_mlx(engine);
 	__clear_engine(engine);
 	close_logfile();
