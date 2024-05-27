@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 11:19:27 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/15 15:22:22 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/05/27 16:54:53 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,6 @@ int	mouse_hook(int (*f)(), void *param)
 
 	engine = get_engine();
 	return (mlx_mouse_hook(engine->win, f, param));
-}
-
-int	loop_hook(int (*f)(), void *param)
-{
-	t_engine	*engine;
-
-	engine = get_engine();
-	return (mlx_loop_hook(engine->mlx, f, param));
 }
 
 int	expose_hook(int (*f)(), void *param)

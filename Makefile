@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/27 21:44:08 by jbrousse          #+#    #+#              #
-#    Updated: 2024/05/27 11:53:49 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/05/27 18:01:04 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,13 +48,9 @@ SRC_CLOSING			=	$(addprefix $(SRC_CLOSING_DIR), $(SRC_CLOSING_LIST))
 SRC_INIT_DIR		=	initializer/
 SRC_INIT_LIST		=	init_engine.c	\
 						init_render.c	\
+						init_texture.c	\
 						init_window.c
 SRC_INIT			=	$(addprefix $(SRC_INIT_DIR), $(SRC_INIT_LIST))
-
-SRC_IO_DIR			=	io/
-SRC_IO_LIST			=	event.c			\
-						keys_press.c
-SRC_IO				=	$(addprefix $(SRC_IO_DIR), $(SRC_IO_LIST))
 
 SRC_LOGGING			=	logger/
 SRC_LOG_LIST		=	logging.c		\
@@ -62,31 +58,31 @@ SRC_LOG_LIST		=	logging.c		\
 SRC_LOG				=	$(addprefix $(SRC_LOGGING), $(SRC_LOG_LIST))
 
 SRC_OBJ_DIR			=	object/
-SRC_OBJ_LIST		=	object.c \
-						debug.c	
+SRC_OBJ_LIST		=	debug.c			\
+						object.c
 SRC_OBJ				=	$(addprefix $(SRC_OBJ_DIR), $(SRC_OBJ_LIST))
 
 SRC_RENDERER_DIR	=	renderer/
 
 SRC_2D_DIR			=	2d_component/
-SRC_2D_LIST			=	init_texture.c	\
-						basic_draw.c	\
+SRC_2D_LIST			=	basic_draw.c	\
 						debug_draw.c
 SRC_2D				=	$(addprefix $(SRC_2D_DIR), $(SRC_2D_LIST))
 
-SRC_RENDERER_LIST	=	$(SRC_2D)		\
-						draw_utils.c	\
-						frame.c			\
-						renderer.c
+SRC_RENDERER_LIST	=	frame.c			\
+						mrender.c		\
+						pixel_utils.c	\
+						utils_render.c	\
+						$(SRC_2D)
 SRC_RENDERER		=	$(addprefix $(SRC_RENDERER_DIR), $(SRC_RENDERER_LIST))
 
-SRC_LIST			=	get_engine.c	\
+SRC_LIST			=	coordinate.c	\
+						event.c			\
+						get_engine.c	\
 						loop.c			\
-						coordinate.c	\
 						$(SRC_LOG)		\
 						$(SRC_OBJ)		\
 						$(SRC_INIT)		\
-						$(SRC_IO)		\
 						$(SRC_CLOSING)	\
 						$(SRC_RENDERER)	
 SRC					=	$(addprefix $(SRC_DIR), $(SRC_LIST))

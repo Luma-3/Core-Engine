@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 23:46:44 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/30 15:45:49 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/27 17:50:00 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	loginfo(const char *file, int line, const char *message);
 void	logwarning(const char *file, int line, const char *message);
 void	logerror(const char *file, int line, const char *message);
 
-int		*get_logger_fd(void);
-int		init_logger(void);
-void	close_logfile(void);
+int		*__get_logger_fd(void);
+int		__init_logger(void);
+void	__close_logfile(void);
 
 #endif

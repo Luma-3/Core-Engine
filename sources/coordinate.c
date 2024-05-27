@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   coordinate.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:30:06 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/15 13:22:49 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/05/27 17:57:21 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "logic.h"
 #include "core.h"
 
 t_vector2	world_to_screen(t_vector2 world, int id_win)

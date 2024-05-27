@@ -6,14 +6,14 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:13:34 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/18 12:45:53 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/27 16:31:56 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "renderer.h"
 #include "core.h"
 
-static int	__get_addr(t_texture *texture)
+static int	get_addr(t_texture *texture)
 {
 	texture->addr = mlx_get_data_addr(texture->img, &texture->bpp,
 			&texture->l_length, &texture->endian);
@@ -25,7 +25,7 @@ static int	__get_addr(t_texture *texture)
 	return (SUCCESS);
 }
 
-t_texture	*init_texture(const char *file_name)
+t_texture	*init_texture(const char *path)
 {
 	t_engine	*engine;
 	t_texture	*texture;
@@ -40,14 +40,14 @@ t_texture	*init_texture(const char *file_name)
 		return (NULL);
 	}
 	texture->img = mlx_xpm_file_to_image(engine->mlx,
-			(char *)file_name, &width, &height);
+			(char *)path, &width, &height);
 	if (texture->img == NULL)
 	{
 		logerror(__FILE__, __LINE__, "mlx_xpm_file_to_image() failed");
 		return (free(texture), NULL);
 	}
 	texture->size = vector2 (width, height);
-	if (__get_addr(texture) == FAILURE)
+	if (get_addr(texture) == FAILURE)
 	{
 		return (free(texture->img), free(texture), NULL);
 	}

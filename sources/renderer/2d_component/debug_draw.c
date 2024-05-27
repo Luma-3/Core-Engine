@@ -6,14 +6,14 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 11:10:05 by antgabri          #+#    #+#             */
-/*   Updated: 2024/05/17 09:12:54 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/27 18:06:45 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "renderer.h"
 #include "core.h"
 
-static void	__draw_line(t_vector2 start, t_vector2 end, t_buffer *buffer,
+static void	__draw_line(t_vector2 start, t_vector2 end, t_win *win,
 	int color)
 {
 	t_vector2	delta;
@@ -34,9 +34,9 @@ static void	__draw_line(t_vector2 start, t_vector2 end, t_buffer *buffer,
 	i = 0;
 	while (i <= steps)
 	{
-		if (coord.x >= 0 && coord.x < buffer->size.x && coord.y >= 0
-			&& coord.y < buffer->size.y)
-			pixel_put(buffer, (t_vector2){coord.x, coord.y}, color);
+		if (coord.x >= 0 && coord.x < win->width && coord.y >= 0
+			&& coord.y < win->height)
+			pixel_put(win, (t_vector2){coord.x, coord.y}, color);
 		coord.x += increment.x;
 		coord.y += increment.y;
 		i++;
@@ -51,5 +51,5 @@ void	draw_ray(void *obj)
 	engine = get_engine();
 	debug = (t_debug *)obj;
 	__draw_line(debug->start, debug->end,
-		engine->win[debug->id_win]->renderer.b_back, debug->color);
+		engine->win[debug->id_win], debug->color);
 }

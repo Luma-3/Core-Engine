@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_render.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 14:49:50 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/15 13:27:05 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/05/27 18:05:28 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static t_buffer	*init_buffer(size_t width, size_t height)
 	return (buffer);
 }
 
-static int	__draw_void(t_buffer *void_buf, int width, int height)
+static int	draw_void(t_win *win, int width, int height)
 {
 	t_vector2	coord;
 
@@ -52,7 +52,7 @@ static int	__draw_void(t_buffer *void_buf, int width, int height)
 		coord.x = 0;
 		while (coord.x < width)
 		{
-			pixel_put(void_buf, coord, VOID_COLOR);
+			pixel_put(win, coord, VOID_COLOR);
 			coord.x++;
 		}
 		coord.y++;
@@ -60,7 +60,7 @@ static int	__draw_void(t_buffer *void_buf, int width, int height)
 	return (SUCCESS);
 }
 
-static int	__init_d_buffer(t_mrender *render, size_t width, size_t height)
+static int	init_d_buffer(t_mrender *render, size_t width, size_t height)
 {
 	render->b_back = init_buffer(width, height);
 	render->b_front = init_buffer(width, height);
@@ -70,10 +70,10 @@ static int	__init_d_buffer(t_mrender *render, size_t width, size_t height)
 int	__init_renderer(void *mlx_ptr, t_win *win, t_vector2 win_size)
 {
 	win->renderer.b_void = init_buffer(win_size.x, win_size.y);
-	__draw_void(win->renderer.b_void, win_size.x, win_size.y);
+	draw_void(win, win_size.x, win_size.y);
 	mlx_put_image_to_window(mlx_ptr, win->win_ptr,
 		win->renderer.b_void->img, 0, 0);
-	if (__init_d_buffer(&(win->renderer), win_size.x, win_size.y) == FAILURE)
+	if (init_d_buffer(&(win->renderer), win_size.x, win_size.y) == FAILURE)
 		return (FAILURE);
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 17:18:18 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/18 12:47:33 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/27 15:14:48 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 #include "core.h"
 #include "renderer.h"
 
-t_game_object	*new_object(unsigned int id, t_texture *texture,
+t_gobject	*new_object(unsigned int id, t_texture *texture,
 	unsigned int win_id)
 {
-	t_game_object	*object;
+	t_gobject	*object;
 	t_engine		*engine;
 
 	engine = get_engine();
@@ -27,13 +27,13 @@ t_game_object	*new_object(unsigned int id, t_texture *texture,
 			"the *texture of an object must not be NULL");
 		return (NULL);
 	}
-	object = (t_game_object *)malloc(sizeof(t_game_object));
+	object = (t_gobject *)malloc(sizeof(t_gobject));
 	if (!object)
 	{
 		logerror(__FILE__, __LINE__, "malloc() failed");
 		return (NULL);
 	}
-	ft_bzero(object, sizeof(t_game_object));
+	ft_bzero(object, sizeof(t_gobject));
 	object->trans.scale = vector2(1, 1);
 	object->id = id;
 	engine->obj2d[id] = object;
@@ -44,7 +44,7 @@ t_game_object	*new_object(unsigned int id, t_texture *texture,
 	return (object);
 }
 
-void	destroy_object(t_game_object *object, int do_destroy_texture)
+void	destroy_object(t_gobject *object, int do_destroy_texture)
 {
 	t_engine	*engine;
 

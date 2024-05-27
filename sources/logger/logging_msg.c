@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 23:46:17 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/28 00:28:54 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/27 17:57:42 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	logmessage(t_loglevel level, const char *file, int line,
 	const char	*level_str[] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 	int			*fd;
 
-	fd = get_logger_fd();
+	fd = __get_logger_fd();
 	if (*fd == -1)
 		return ;
 	ft_putstr_fd("[", *fd);

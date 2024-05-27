@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:31:24 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/27 11:52:24 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/27 18:02:50 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@
 
 # include "logging.h"
 # include "renderer.h"
-# include "logic.h"
 # include "object.h"
-# include "input.h"
-# include "data.h"
 
 # define FAILURE	-1
 # define SUCCESS	0
@@ -35,34 +32,50 @@
 
 # define PI 		3.14159265359
 
+# define MAX_2D_OBJ		1000
+# define MAX_DEBUG_OBJ	1000
+
+# define MAX_WIN		10
+
+typedef struct s_win
+{
+	void			*win_ptr;
+	char			*title;
+	unsigned int	width;
+	unsigned int	height;
+	t_mrender		renderer;
+	t_vector2		offset;
+}					t_win;
+
+typedef struct s_engine
+{
+	void			*mlx;
+	t_win			*win[MAX_WIN];
+	int				nb_win;
+	int				(*update)(void *);
+	void			*update_param;
+	void			(*render_f)(void *);
+	void			*render_param;
+	t_gobject		*obj2d[MAX_2D_OBJ];
+	int				obj2d_count;
+	t_debug			*debug[MAX_DEBUG_OBJ];
+	int				debug_count;
+}			t_engine;
+
 t_engine	*get_engine(void);
 
 int			init_engine(void);
 
 int			init_window(t_vector2 win_size, const char *title);
 
-void		loop(int (*f)(void *), void *param);
+void		loop(void);
 
 int			stop_engine(void);
 
 int			__init_renderer(void *mlx_ptr, t_win *win, t_vector2 win_size);
 
-//////////////////////////
-//		IO/envent.c		//
-//////////////////////////
-
-int			key_hook(int (*f)(), void *param);
-
-int			mouse_hook(int (*f)(), void *param);
-
-int			loop_hook(int (*f)(), void *param);
-
-int			expose_hook(int (*f)(), void *param);
-
-int			event_hook(int (*f)(), int envent, int mask, void *param, int id_win);
+t_vector2	world_to_screen(t_vector2 world, int id_win);
 
 void		destroy_win(t_win *win);
-
-void	destroy_renderer(t_mrender *renderer);
 
 #endif

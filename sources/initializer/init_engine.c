@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_engine.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:43:18 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/15 14:13:55 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/05/27 17:58:21 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	init_engine(void)
 {
 	t_engine	*engine;
 
-	init_logger();
+	__init_logger();
 	engine = get_engine();
 	ft_bzero(engine, sizeof(t_engine));
 	engine->mlx = mlx_init();
