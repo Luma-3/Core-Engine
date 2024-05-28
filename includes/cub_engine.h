@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:09:38 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/28 13:40:03 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/28 14:38:06 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <vectorft.h>
+
+# include "data.h"
 
 //////////////////////////
 //		  Logger		//
@@ -61,12 +63,6 @@ void		logerror(const char *file, int line, const char *message);
 //		  Engine		//
 //////////////////////////
 
-typedef struct s_texture	t_texture;
-
-typedef struct s_engine		t_engine;
-
-typedef struct s_win		t_win;
-
 /**
  * @brief Initialize the engine
  * 
@@ -75,6 +71,18 @@ typedef struct s_win		t_win;
  * 	engine function and Call it only once
 */
 int			init_engine(void);
+
+/**
+ * @brief Stop the engine
+*/
+int			stop_engine(void);
+
+/**
+ * @brief destroy a window
+ * 
+ * @param win the window to destroy 
+*/
+void		destroy_win(t_win *win);
 
 /**
  * @brief initialize a texture from a `file_name`
@@ -227,10 +235,6 @@ void		draw_ray(void *obj);
 //		  Object		//
 //////////////////////////
 
-typedef struct s_gobject	t_gobject;
-
-typedef struct s_debug		t_debug;
-
 /**
  * @brief Create a new debug object
  * 
@@ -296,7 +300,7 @@ void		add_loop_update(int (*f)(void *), void *param);
  * 
  * @note The function callback call after reset the back buffer to void
 */
-void		add_loop_render(void (*f)(void *), void *param);
+void		add_loop_render(int (*f)(void *), void *param);
 
 /**
  * @brief Start the rendering loop
@@ -311,7 +315,6 @@ void		loop(void);
  * @warning This function is internal, critical functions
  * take care to use it properly
 */
-t_engine	*__get_engine(void)
-
+t_engine	*__get_engine(void);
 
 #endif

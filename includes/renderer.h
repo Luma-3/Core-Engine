@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:04:30 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/28 13:45:44 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/28 14:26:54 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,13 @@
 # include <stdlib.h>
 
 # include <vectorft.h>
+# include "data.h"
 
 typedef struct s_win		t_win;
 
 typedef struct s_texture	t_texture;
 
 typedef struct s_engine		t_engine;
-
-typedef struct s_buffer
-{
-	void		*img;
-	char		*addr;
-	int			bpp;
-	int			l_length;
-	int			endian;
-	t_vector2	size;
-}				t_buffer;
-
-typedef struct s_main_render
-{
-	t_buffer	*b_front;
-	t_buffer	*b_back;
-	t_buffer	*b_void;
-}				t_mrender;
 
 int			__renderer(void *param);
 

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 23:13:02 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/28 13:32:45 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/28 14:35:07 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	add_loop_update(int (*f)(void *), void *param)
 	engine->update = f;
 }
 
-void	add_loop_render(void (*f)(void *), void *param)
+void	add_loop_render(int (*f)(void *), void *param)
 {
 	t_engine	*engine;
 

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 16:58:08 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/27 17:48:57 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/28 14:30:13 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,8 @@
 # include <string.h>
 # include <stdbool.h>
 
-# include "component.h"
 # include "logging.h"
-
-typedef struct s_gobject
-{
-	int			type;
-	int			id;
-	t_transform	trans;
-	t_render2d	render;
-}				t_gobject;
-
-typedef struct s_debug
-{
-	bool		active;
-	t_vector2	start;
-	t_vector2	end;
-	int			color;
-	int			id_win;
-	void		(*draw_ray)(void *obj);
-}				t_debug;
+# include "data.h"
 
 t_gobject		*new_object(unsigned int id, t_texture *texture,
 					unsigned int win_id);
