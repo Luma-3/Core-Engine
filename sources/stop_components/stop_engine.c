@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 11:17:11 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/28 13:32:45 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/28 18:14:16 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	stop_engine(void)
 		engine->nb_win--;
 		if (engine->win[engine->nb_win])
 		{
-			destroy_win(engine->win[engine->nb_win]);
+			destroy_win(engine->nb_win);
 		}
 	}
 	__close_mlx(engine);

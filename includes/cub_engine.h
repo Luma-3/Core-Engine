@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:09:38 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/28 14:38:06 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/28 16:37:43 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@ int			stop_engine(void);
 /**
  * @brief destroy a window
  * 
- * @param win the window to destroy 
+ * @param win the id of window to destroy
 */
-void		destroy_win(t_win *win);
+void		destroy_win(int id_win);
 
 /**
  * @brief initialize a texture from a `file_name`

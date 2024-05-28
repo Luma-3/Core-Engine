@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 10:09:47 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/28 13:32:45 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/28 15:55:00 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static t_win	*base_win(const char *title)
 {
 	t_win	*win;
 
-	win = malloc(sizeof(t_win));
+	win = ft_calloc(1, sizeof(t_win));
 	if (!win)
 	{
 		logerror(__FILE__, __LINE__, "Failed to allocate memory for window");

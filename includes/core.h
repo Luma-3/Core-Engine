@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:31:24 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/28 14:25:55 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/28 18:13:35 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,6 @@ void		destroy_texture(t_texture *texture);
 
 void		__destroy_renderer(t_mrender *renderer);
 
-void		destroy_win(t_win *win);
+void		destroy_win(int id_win);
 
 #endif
