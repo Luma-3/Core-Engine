@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:29:25 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/27 18:03:14 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/28 13:44:34 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ static void	double_buffering(t_engine *engine)
 	{
 		b_back = engine->win[i]->renderer.b_back;
 		b_front = engine->win[i]->renderer.b_front;
-		swap_buffers(&b_front,
+		__swap_buffers(&b_front,
 			&b_back);
-		put_frame(b_front, engine->win[i]);
+		__put_frame(b_front, engine->win[i]);
 		i++;
 	}
 }
@@ -52,10 +52,11 @@ int	__renderer(void *param)
 {
 	t_engine	*engine;
 
-	engine = get_engine();
+	engine = __get_engine();
 	copy_void(engine);
 	if (engine->render_f)
 		engine->render_f(param);
+	__render_objets(engine);
 	double_buffering(engine);
 	return (SUCCESS);
 }

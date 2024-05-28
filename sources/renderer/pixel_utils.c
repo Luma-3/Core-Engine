@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:23:21 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/27 15:37:55 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/28 11:21:46 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ int	take_pixel(t_texture *texture, t_vector2 coord)
 	int	color;
 	int	offset;
 
-	offset = ((int)(coord.y) * (texture->l_length)
-			+ (int)(coord.x) * (texture->bpp / 8));	
+	offset = ((int)(coord.y) *(texture->l_length)
+			+ (int)(coord.x) *(texture->bpp / 8));
 	color = create_trgb(
-				texture->addr[offset + 3],
-				texture->addr[offset + 2],
-				texture->addr[offset + 1],
-				texture->addr[offset]
-				);
+			texture->addr[offset + 3],
+			texture->addr[offset + 2],
+			texture->addr[offset + 1],
+			texture->addr[offset]
+			);
 	return (color);
 }

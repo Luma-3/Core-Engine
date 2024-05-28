@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:04:30 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/27 18:07:16 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/28 13:45:44 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 typedef struct s_win		t_win;
 
 typedef struct s_texture	t_texture;
+
+typedef struct s_engine		t_engine;
 
 typedef struct s_buffer
 {
@@ -39,24 +41,19 @@ typedef struct s_main_render
 	t_buffer	*b_void;
 }				t_mrender;
 
-void		pixel_put(t_win *win, t_vector2 coord, int color);
-
-int			apply_shade(int color, float shade);
-
 int			__renderer(void *param);
 
-int			create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned char b);
+void		__render_objets(t_engine *engine);
 
-void		put_frame(t_buffer *frame, void *win);
+int			create_trgb(unsigned char t, unsigned char r,
+				unsigned char g, unsigned char b);
 
-void		swap_buffers(t_buffer **front, t_buffer **back);
+void		__swap_buffers(t_buffer **front, t_buffer **back);
 
-void		basic_draw2d(void *self);
+void		__put_frame(t_buffer *frame, void *win);
 
-t_texture	*init_texture(const char *file_name);
+void		pixel_put(t_win *win, t_vector2 coord, int color);
 
-void		destroy_texture(t_texture *texture);
-
-void		destroy_renderer(t_mrender *renderer);
+int			take_pixel(t_texture *texture, t_vector2 coord);
 
 #endif

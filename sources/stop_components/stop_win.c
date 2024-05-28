@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 12:57:24 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/27 11:53:04 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/28 13:32:45 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void	destroy_win(t_win *win)
 {
 	t_engine	*engine;
 
-	engine = get_engine();
+	engine = __get_engine();
 	mlx_clear_window(engine->mlx, win->win_ptr);
 	if (win->title)
 		free(win->title);
-	destroy_renderer(&win->renderer);
+	__destroy_renderer(&win->renderer);
 	mlx_destroy_window(engine->mlx, win->win_ptr);
 	free(win);
 }

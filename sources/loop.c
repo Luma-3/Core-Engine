@@ -6,18 +6,18 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 23:13:02 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/27 18:07:34 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/28 13:32:45 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 #include "renderer.h"
 
-void	add_loop_logical(int (*f)(void *), void *param)
+void	add_loop_update(int (*f)(void *), void *param)
 {
 	t_engine	*engine;
 
-	engine = get_engine();
+	engine = __get_engine();
 	engine->update_param = param;
 	engine->update = f;
 }
@@ -26,7 +26,7 @@ void	add_loop_render(void (*f)(void *), void *param)
 {
 	t_engine	*engine;
 
-	engine = get_engine();
+	engine = __get_engine();
 	engine->render_param = param;
 	engine->render_f = f;
 }
@@ -46,7 +46,7 @@ void	loop(void)
 {
 	t_engine	*engine;
 
-	engine = get_engine();
+	engine = __get_engine();
 	mlx_loop_hook(engine->mlx, &__loop_function, engine);
 	mlx_loop(engine->mlx);
 }

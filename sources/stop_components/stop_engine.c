@@ -6,13 +6,13 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 11:17:11 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/27 18:03:06 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/28 13:32:45 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 
-int	__close_mlx(t_engine *engine)
+static int	__close_mlx(t_engine *engine)
 {
 	if (engine->mlx)
 	{
@@ -27,7 +27,7 @@ int	__close_mlx(t_engine *engine)
 	return (SUCCESS);
 }
 
-int	__clear_engine(t_engine *engine)
+static int	__clear_engine(t_engine *engine)
 {
 	engine = NULL;
 	(void)engine;
@@ -39,7 +39,7 @@ int	stop_engine(void)
 {
 	t_engine	*engine;
 
-	engine = get_engine();
+	engine = __get_engine();
 	while (engine->nb_win > 0)
 	{
 		engine->nb_win--;

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 16:17:08 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/15 11:35:06 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/28 13:32:45 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_debug	*new_debug(t_vector2 start, t_vector2 end, int id)
 	t_debug		*debug;
 	t_engine	*engine;
 
-	engine = get_engine();
+	engine = __get_engine();
 	debug = malloc(sizeof(t_debug));
 	if (!debug)
 		return (NULL);

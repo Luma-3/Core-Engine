@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 14:49:50 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/27 18:05:28 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/28 13:32:45 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static t_buffer	*init_buffer(size_t width, size_t height)
 		logwarning(__FILE__, __LINE__, "init_buffer failed");
 		return (NULL);
 	}
-	buffer->img = mlx_new_image(get_engine()->mlx, width, height);
+	buffer->img = mlx_new_image(__get_engine()->mlx, width, height);
 	if (!buffer->img)
 	{
 		logwarning(__FILE__, __LINE__, "mlx_new_image() failed");

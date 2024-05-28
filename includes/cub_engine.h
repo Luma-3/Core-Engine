@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:09:38 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/27 17:44:02 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/28 13:40:03 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void		logerror(const char *file, int line, const char *message);
 typedef struct s_texture	t_texture;
 
 typedef struct s_engine		t_engine;
+
+typedef struct s_win		t_win;
 
 /**
  * @brief Initialize the engine
@@ -151,11 +153,165 @@ int			expose_hook(int (*f)(), void *param);
  * @brief Hook a function to an event on a window
  * 
  * @param f the function to call when an event is triggered
- * @param envent the event to hook
- * @param mask the mask to apply to the event
- * @param param the parameter to pass to 
+ * @param maskage the maskage of the event (0 index for event, 1 index for mask)
+ * @param param the parameter to pass to function callback
+ * @param id_win the id of the window where the event is hooked
 */
-int			event_hook(int (*f)(), int envent, int mask,
-				void *param, int id_win);
+int			event_hook(int (*f)(), int maskage[2], void *param, int id_win);
+
+//////////////////////////
+//		  Render		//
+//////////////////////////
+
+/**
+ * @brief Create a TRGB color
+ * 
+ * @param t the transparency of the color
+ * @param r the red value of the color
+ * @param g the green value of the color
+ * @param b the blue value of the color
+ * 
+ * @return the TRGB color in an integer
+*/
+int			create_trgb(unsigned char t, unsigned char r,
+				unsigned char g, unsigned char b);
+
+/**
+ * @brief Put a pixel on the renderer of the window
+ * 
+ * @param win the window where the pixel will be put
+ * @param coord the coordinate of the pixel
+ * @param color the color of the pixel
+ * 
+ * @note The pixel will be put on the back buffer of the window
+ */
+void		pixel_put(t_win *win, t_vector2 coord, int color);
+
+/**
+ * @brief Apply a shade to a color
+ * 
+ * @param color the color to shade
+ * @param shade a modifier to apply to the color
+*/
+int			apply_shade(int color, float shade);
+
+/**
+ * @brief Take a pixel from a texture
+ * 
+ * @param texture the texture where the pixel will be taken
+ * @param coord the coordinate of the pixel
+ * 
+ * @return the color of the pixel
+*/
+int			take_pixel(t_texture *texture, t_vector2 coord);
+
+/**
+ * @brief Draw a 2D object on the window
+ * 
+ * @param self the render2d of the object to draw
+ * 
+ * @note this function must be put in variable `draw` of the render2d
+*/
+void		basic_draw2d(void *self);
+
+/**
+ * @brief Draw a ray on the window
+ * 
+ * @param obj the debug object to draw
+ * 
+ * @note this function must be put in variable `draw` of the debug object
+*/
+void		draw_ray(void *obj);
+
+//////////////////////////
+//		  Object		//
+//////////////////////////
+
+typedef struct s_gobject	t_gobject;
+
+typedef struct s_debug		t_debug;
+
+/**
+ * @brief Create a new debug object
+ * 
+ * @param start the start position of the ray
+ * @param end the end position of the ray
+ * @param id the id of the debug object
+ * 
+ * @return a pointer to the debug object, NULL if an error occured
+*/
+t_debug		*new_debug(t_vector2 start, t_vector2 end, int id);
+
+/**
+ * @brief Create a new object
+ * 
+ * @param id the id of the object
+ * @param texture the texture of the object
+ * @param win_id the id of the window where the object will be drawn
+ * 
+ * @return a pointer to the object, NULL if an error occured
+*/
+t_gobject	*new_object(unsigned int id, t_texture *texture,
+				unsigned int win_id);
+
+/**
+ * @brief Destroy a game object
+ * 
+ * @param object the object to destroy
+ * 
+ * @param do_destroy_texture if 1, the texture of the object will be destroyed
+*/
+void		destroy_object(t_gobject *object, int do_destroy_texture);
+
+//////////////////////////
+//		  Utils 		//
+//////////////////////////
+
+/**
+ * @brief Convert a world position to a screen position
+ * 
+ * @param world the world position to convert
+ * @param id_win the id of the window where the position will be converted
+ * 
+ * @return the screen position
+*/
+t_vector2	world_to_screen(t_vector2 world, int id_win);
+
+/**
+ * @brief add a function to the loop update
+ * 
+ * @param f the function to add
+ * @param param the parameter to pass to the callback function
+ * 
+ * @note The function callback call before the rendering loop
+ * 
+*/
+void		add_loop_update(int (*f)(void *), void *param);
+
+/**
+ * @brief add a function to the loop render
+ * 
+ * @param f the function to add
+ * @param param the parameter to pass to the callback function
+ * 
+ * @note The function callback call after reset the back buffer to void
+*/
+void		add_loop_render(void (*f)(void *), void *param);
+
+/**
+ * @brief Start the rendering loop
+*/
+void		loop(void);
+
+/**
+ * @brief Get the engine 
+ * 
+ * @return a pointer to the engine
+ * 
+ * @warning This function is internal, critical functions
+ * take care to use it properly
+*/
+t_engine	*__get_engine(void)
+
 
 #endif

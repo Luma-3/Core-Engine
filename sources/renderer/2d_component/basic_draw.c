@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   basic_draw.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: monsieurc <monsieurc@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 11:19:15 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/25 12:12:53 by monsieurc        ###   ########.fr       */
+/*   Updated: 2024/05/28 13:32:45 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ static t_vector2	cal_dst(t_vector2 angle, t_vector2 offset, t_vector2 coord)
 
 void	basic_draw2d(void *self)
 {
-	t_vector2	dst;
 	t_vector2	src;
 	t_vector2	offset;
 	t_vector2	angle;
 	t_vector2	coord;
-	t_render2d	*this = (t_render2d *)self;
+	t_render2d	*this;
 
+	this = (t_render2d *)self;
 	angle = vector2(cos(this->trans->rot.x), sin(this->trans->rot.x));
 	coord = world_to_screen(this->trans->pos, this->id_win);
 	src.y = 0;
@@ -43,9 +43,9 @@ void	basic_draw2d(void *self)
 		{
 			offset.x = (src.x - (this->texture->size.x / 2))
 				* this->trans->scale.x;
-			dst = cal_dst(angle, offset, vector2(coord.x, coord.y));
-			// copy_pixel(get_engine()->win[this->id_win],
-			// 	this->texture, dst, src);
+			pixel_put(__get_engine()->win[this->id_win],
+				cal_dst(angle, offset, vector2(coord.x, coord.y)),
+				take_pixel(this->texture, src));
 			src.x++;
 		}
 		src.y++;

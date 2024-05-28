@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:13:34 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/27 16:31:56 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/28 13:32:45 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_texture	*init_texture(const char *path)
 	int			width;
 	int			height;
 
-	engine = get_engine();
+	engine = __get_engine();
 	texture = (t_texture *)ft_calloc(1, sizeof(t_texture));
 	if (texture == NULL)
 	{
@@ -61,6 +61,6 @@ void	destroy_texture(t_texture *texture)
 		logwarning(__FILE__, __LINE__, "the texture is NULL");
 		return ;
 	}
-	mlx_destroy_image(get_engine()->mlx, texture->img);
+	mlx_destroy_image(__get_engine()->mlx, texture->img);
 	free(texture);
 }

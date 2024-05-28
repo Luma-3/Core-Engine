@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 11:10:05 by antgabri          #+#    #+#             */
-/*   Updated: 2024/05/27 18:06:45 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/28 13:32:45 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	draw_ray(void *obj)
 	t_engine	*engine;
 	t_debug		*debug;
 
-	engine = get_engine();
+	engine = __get_engine();
 	debug = (t_debug *)obj;
 	__draw_line(debug->start, debug->end,
 		engine->win[debug->id_win], debug->color);

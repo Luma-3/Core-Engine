@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 20:31:24 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/27 18:02:50 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/28 13:32:45 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef struct s_engine
 	int				debug_count;
 }			t_engine;
 
-t_engine	*get_engine(void);
+t_engine	*__get_engine(void);
 
 int			init_engine(void);
 
@@ -70,11 +70,15 @@ int			init_window(t_vector2 win_size, const char *title);
 
 void		loop(void);
 
-int			stop_engine(void);
-
 int			__init_renderer(void *mlx_ptr, t_win *win, t_vector2 win_size);
 
 t_vector2	world_to_screen(t_vector2 world, int id_win);
+
+int			stop_engine(void);
+
+void		destroy_texture(t_texture *texture);
+
+void		__destroy_renderer(t_mrender *renderer);
 
 void		destroy_win(t_win *win);
 

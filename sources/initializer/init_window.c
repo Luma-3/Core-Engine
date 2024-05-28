@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 10:09:47 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/18 15:45:36 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/28 13:32:45 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	init_window(t_vector2 win_size, const char *title)
 	t_engine	*engine;
 	t_win		*win;
 
-	engine = get_engine();
+	engine = __get_engine();
 	if (engine->nb_win >= MAX_WIN)
 	{
 		logerror(__FILE__, __LINE__, "Too many windows");

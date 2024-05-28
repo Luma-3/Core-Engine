@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:03:12 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/27 16:19:06 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/28 13:32:45 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static bool	culling_obj(t_vector2 coord, t_vector2 size, int id_win)
 {
 	t_engine	*engine;
 
-	engine = get_engine();
+	engine = __get_engine();
 	if (coord.x - (size.x / 2) > engine->win[id_win]->width
 		|| coord.x + (size.x / 2) < 0)
 	{
