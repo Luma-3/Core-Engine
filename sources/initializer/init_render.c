@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_render.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 14:49:50 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/28 13:32:45 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/29 11:51:24 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,22 @@ static int	draw_void(t_win *win, int width, int height)
 static int	init_d_buffer(t_mrender *render, size_t width, size_t height)
 {
 	render->b_back = init_buffer(width, height);
+	if (!render->b_back)
+		return (FAILURE);
 	render->b_front = init_buffer(width, height);
+	if (!render->b_front)
+	{
+		free(render->b_back);
+		return (FAILURE);
+	}
 	return (SUCCESS);
 }
 
 int	__init_renderer(void *mlx_ptr, t_win *win, t_vector2 win_size)
 {
 	win->renderer.b_void = init_buffer(win_size.x, win_size.y);
+	if (!win->renderer.b_void)
+		return (FAILURE);
 	draw_void(win, win_size.x, win_size.y);
 	mlx_put_image_to_window(mlx_ptr, win->win_ptr,
 		win->renderer.b_void->img, 0, 0);
