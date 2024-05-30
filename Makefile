@@ -6,7 +6,7 @@
 #    By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/27 21:44:08 by jbrousse          #+#    #+#              #
-#    Updated: 2024/05/29 10:38:37 by antgabri         ###   ########.fr        #
+#    Updated: 2024/05/30 11:55:43 by antgabri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -176,7 +176,7 @@ $(OBJ_DIR)%.o : $(SRC_DIR)%.c
 	@$(eval COMPILED_SRCS=$(shell expr $(COMPILED_SRCS) + 1))
 	@$(call print_progress,$(COMPILED_SRCS),$(TOTAL_SRCS), $<)
 
-$(NAME): $(OBJ) $(MLX) $(LIBFT) $(VECTORFT)
+$(NAME): $(MLX) $(LIBFT) $(VECTORFT) $(OBJ)
 	@ar -x $(LIBFT) --output=$(OBJ_DIR)
 	@ar -x $(MLX) --output=$(OBJ_DIR)
 	@ar -x $(VECTORFT) --output=$(OBJ_DIR)
@@ -186,9 +186,9 @@ $(NAME): $(OBJ) $(MLX) $(LIBFT) $(VECTORFT)
 clean: 
 	@rm -rf $(OBJ_DIR)
 	@echo "$(COLOR_RED)$(BOLD)Delete $(NAME) objects$(COLOR_RESET)"
-	@make -C $(LIBFT_DIR) clean
-	@make -C $(MLX_DIR) clean
-	@make -C $(VECTORFT_DIR) clean
+	@make -sC $(LIBFT_DIR) clean
+	@make -sC $(MLX_DIR) clean
+	@make -sC $(VECTORFT_DIR) clean
 
 fclean: clean
 	@rm -f $(NAME)
