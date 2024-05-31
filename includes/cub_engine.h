@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:09:38 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/28 16:37:43 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/30 15:58:31 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,15 @@ void		destroy_win(int id_win);
  * @note The texture need .xpm format
 */
 t_texture	*init_texture(const char *path);
+
+/**
+ * @brief Initialize a void texture
+ * 
+ * @param size the size of the texture
+ * 
+ * @return a pointer to the texture, NULL if an error occured
+*/
+t_texture	*init_void_texture(t_vector2 size);
 
 /**
  * @brief Destroy a texture

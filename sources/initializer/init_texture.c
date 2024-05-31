@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:13:34 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/28 13:32:45 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/30 16:41:38 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,32 @@ t_texture	*init_texture(const char *path)
 	{
 		return (free(texture->img), free(texture), NULL);
 	}
+	return (texture);
+}
+
+t_texture	*init_void_texture(t_vector2 size)
+{
+	t_texture	*texture;
+
+	texture = (t_texture *)ft_calloc(1, sizeof(t_texture));
+	if (texture == NULL)
+	{
+		logerror(__FILE__, __LINE__, "allocation failed...");
+		return (NULL);
+	}
+	texture->img = mlx_new_image(__get_engine()->mlx, size.x, size.y);
+	if (texture->img == NULL)
+	{
+		logerror(__FILE__, __LINE__, "mlx_new_image() failed");
+		free(texture);
+		return (NULL);
+	}
+	get_addr(texture);
+	if (texture->addr == NULL)
+	{
+		return (free(texture->img), free(texture), NULL);
+	}
+	texture->size = size;
 	return (texture);
 }
 
