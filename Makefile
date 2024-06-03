@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+         #
+#    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/27 21:44:08 by jbrousse          #+#    #+#              #
-#    Updated: 2024/05/30 11:55:43 by antgabri         ###   ########.fr        #
+#    Updated: 2024/06/03 16:26:52 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,6 +80,7 @@ SRC_LIST			=	coordinate.c	\
 						event.c			\
 						get_engine.c	\
 						loop.c			\
+						pointer.c		\
 						$(SRC_LOG)		\
 						$(SRC_OBJ)		\
 						$(SRC_INIT)		\

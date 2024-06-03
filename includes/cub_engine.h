@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:09:38 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/30 15:58:31 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/06/03 16:25:09 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,32 +139,35 @@ int			init_window(t_vector2 win_size, const char *title);
  * 
  * @param f the function to call when a key event is triggered
  * @param param the parameter to pass to the function
+ * @param id_win the id of the window where the event is hooked
  * 
  * @note The function Callback has hide parameter, 
  * the first parameter is the key code (`int`)
 */
-int			key_hook(int (*f)(), void *param);
+int			key_hook(int (*f)(), void *param, int id_win);
 
 /**
  * @brief Hook a function to the mouse event
  * 
  * @param f the function to call when a mouse event is triggered
  * @param param the parameter to pass to the function
+ * @param id_win the id of the window where the event is hooked
  * 
  * @note The function Callback has hide parameter,
  * `keycode` - the key code (`int`),
  * `x` - the x position of the mouse (`int`)
  * `y` - the y position of the mouse (`int`)
 */
-int			mouse_hook(int (*f)(), void *param);
+int			mouse_hook(int (*f)(), void *param, int id_win);
 
 /**
  * @brief Hook a function to the expose event
  * 
  * @param f the function to call when an expose event is triggered
  * @param param the parameter to pass to the function
+ * @param id_win the id of the window where the event is hooked
 */
-int			expose_hook(int (*f)(), void *param);
+int			expose_hook(int (*f)(), void *param, int id_win);
 
 /**
  * @brief Hook a function to an event on a window
@@ -175,6 +178,17 @@ int			expose_hook(int (*f)(), void *param);
  * @param id_win the id of the window where the event is hooked
 */
 int			event_hook(int (*f)(), int maskage[2], void *param, int id_win);
+
+/**
+ * @brief Get the position of the mouse
+ * 
+ * @param id_win the id of the window where the mouse position will be taken
+ * @param x the x position of the mouse
+ * @param y the y position of the mouse
+*/
+int			get_mouse_pos_hook(int id_win, int *x, int *y);
+
+void		fix_pointer(int x, int y);
 
 //////////////////////////
 //		  Render		//

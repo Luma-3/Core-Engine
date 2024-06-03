@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:29:25 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/28 13:44:34 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/06/03 15:29:12 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int	__renderer(void *param)
 	copy_void(engine);
 	if (engine->render_f)
 		engine->render_f(param);
-	__render_objets(engine);
 	double_buffering(engine);
 	return (SUCCESS);
 }
