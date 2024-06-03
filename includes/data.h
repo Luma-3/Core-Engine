@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 14:21:46 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/28 14:35:55 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/06/03 20:15:18 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <vectorft.h>
 # include <stdbool.h>
+# include <X11/X.h>
 
 # define MAX_2D_OBJ		1000
 # define MAX_DEBUG_OBJ	1000

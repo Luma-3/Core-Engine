@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 13:09:38 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/06/03 16:25:09 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/06/03 19:37:23 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,8 @@ int			event_hook(int (*f)(), int maskage[2], void *param, int id_win);
 int			get_mouse_pos_hook(int id_win, int *x, int *y);
 
 void		fix_pointer(int x, int y);
+
+void		hide_pointer(int hide);
 
 //////////////////////////
 //		  Render		//

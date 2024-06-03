@@ -6,11 +6,13 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 11:17:11 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/28 18:14:16 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/06/03 20:15:11 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
+#include "X11/Xlib.h"
+#include "mlx_int.h"
 
 static int	__close_mlx(t_engine *engine)
 {
@@ -38,8 +40,10 @@ static int	__clear_engine(t_engine *engine)
 int	stop_engine(void)
 {
 	t_engine	*engine;
+	t_xvar		*xvar;
 
 	engine = __get_engine();
+	xvar = engine->mlx;
 	while (engine->nb_win > 0)
 	{
 		engine->nb_win--;
