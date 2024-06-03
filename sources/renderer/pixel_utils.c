@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pixel_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:23:21 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/05/28 11:21:46 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/06/03 13:14:24 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	create_trgb(unsigned char t, unsigned char r,
 
 void	pixel_put(t_win *win, t_vector2 coord, int color)
 {
-	int			offset;
-	t_buffer	*buffer;
+	int				offset;
+	t_buffer		*buffer;
 
 	buffer = win->renderer.b_back;
 	if (!(coord.x >= 0
