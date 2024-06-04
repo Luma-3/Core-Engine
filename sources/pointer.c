@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 16:18:56 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/06/03 20:16:00 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/06/04 11:19:42 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,26 @@
 #include "core.h"
 #include "mlx_int.h"
 
-static void	get_pos_win(t_xvar *xvar, int *x, int *y)
+void	get_pos_win(int *x, int *y)
 {
-	Window				win;
+	t_engine			*engine;
+	t_xvar				*xvar;
 	XWindowAttributes	win_attr;
 
+	engine = __get_engine();
+	xvar = engine->mlx;
 	XGetWindowAttributes(xvar->display, xvar->win_list->window, &win_attr);
-	XTranslateCoordinates(xvar->display, xvar->win_list->window, win_attr.root,
-		-win_attr.border_width, -win_attr.border_width, x, y, &win);
+	*x = win_attr.x;
+	*y = win_attr.y - (win_attr.y - 1);
 }
 
 void	fix_pointer(int x, int y)
 {
 	t_engine	*engine;
 	t_xvar		*xvar;
-	int			x_win;
-	int			y_win;
 
 	engine = __get_engine();
 	xvar = engine->mlx;
-	get_pos_win(xvar, &x_win, &y_win);
-	XWarpPointer(xvar->display, None, xvar->win_list->window, 0, 0, 0, 0,
-		x + x_win + (engine->win[0]->width / 2),
-		y + y_win + (engine->win[0]->height / 2));
+	XWarpPointer(xvar->display, None, xvar->win_list->window, 0, 0, 0, 0, x, y);
 	XFlush(xvar->display);
 }
